@@ -11,7 +11,7 @@
 <body class="login-page"> <div class="container">
         <div class="form-box">
             <h1 id="title">Giriş Yap</h1>
-            <form action="/login" method="POST"> <div class="input-group">
+            <form action="/auth/login" method="POST"> <div class="input-group">
                     <div class="input-field">
                         <i class="fa-solid fa-envelope"></i>
                         <input type="email" placeholder="E-posta" name="email">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="btn-field">
-                    <button type="button" id="signInBtn" class="disable">Giriş Yap</button>
+                    <button type="submit" id="signInBtn" class="disable">Giriş Yap</button>
                     <button type="button" id="signUpBtn">Kayıt Ol</button>
                 </div>
                 <p>Şifrenizi mi unuttunuz? <a href="#">Şifreyi Sıfırla</a></p>
@@ -36,7 +36,7 @@
 
             if (signUpBtn) {
                 signUpBtn.addEventListener('click', () => {
-                    window.location.href = 'register.html'; // Kayıt ol sayfasına yönlendir
+                    window.location.href = '/auth/register'; // Kayıt ol sayfasına yönlendir
                 });
             }
         });

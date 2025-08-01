@@ -6,6 +6,7 @@ dotenv.config();
 const config = {
     environment: process.env.NODE_ENV || "production",
     port: process.env.PORT || 4002,
+    serverUrl: "http://localhost:4000",
 
     database: {
         host: process.env.DB_HOST || "localhost",
