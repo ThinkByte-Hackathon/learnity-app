@@ -6,12 +6,16 @@ import { ControllerGroup } from "@/types/controllerAttributes";
 // PAGE IMPORTS:
 import { getWelcomePage } from "./controller/home/welcome";
 import { getLoginPage, postLoginPage } from "./controller/auth/login";
-import { getRegisterPage } from "./controller/auth/register";
+import { getRegisterPage, postRegisterPage } from "./controller/auth/register";
+import { getDashboardPage } from "./controller/home/dashboard";
 
 // ROUTES:
 export const endpoints: ControllerGroup = {
-    "": { 
-        GET: { handler: getWelcomePage, auth: false }
+    home: {
+        GET: { handler: getWelcomePage, auth: false },
+    },
+    dashboard: {
+        GET: { handler: getDashboardPage, auth: true }
     },
     auth: {
         login: {
@@ -19,7 +23,8 @@ export const endpoints: ControllerGroup = {
             POST: { handler: postLoginPage, auth: false },
         },
         register: {
-            GET: { handler: getRegisterPage, auth: false }
+            GET: { handler: getRegisterPage, auth: false },
+            POST: { handler: postRegisterPage, auth: false }
         }
     }
 }

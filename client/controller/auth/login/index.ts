@@ -1,6 +1,7 @@
 import config from "@/config";
 import axios, { AxiosError } from "axios";
 import { Request, Response } from "express";
+import setCookie from "@/services/cookie/set";
 
 // Sayfayı açan fonksiyon:
 const getLoginPage = async (
@@ -40,9 +41,26 @@ const postLoginPage = async (
         });
 
         console.log("Login isteği başarılı:", response.data);
+        console.log("Response headers:", response.headers);
+
+        // Server'dan gelen set-cookie header'ını direkt olarak forward et
+        const setCookieHeaders = response.headers['set-cookie'];
+        console.log("Set-Cookie headers:", setCookieHeaders);
         
+        if (setCookieHeaders && setCookieHeaders.length > 0) {
+            // Server'dan gelen cookie'leri direkt olarak client'a forward et
+            res.setHeader('Set-Cookie', setCookieHeaders);
+            console.log("Set-Cookie headers forwarded to client");
+        } else {
+            console.log("No set-cookie headers found");
+        }
+
+        return res.redirect("/dashboard");
+
     } catch (error) {
         console.error("Login isteği başarısız oldu! Response:", error instanceof AxiosError && error.response?.data);
+
+        return res.redirect("/auth/login");
     }
 }
 

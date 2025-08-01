@@ -1,24 +1,66 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoş Geldiniz!</title>
-  <link rel="stylesheet" href="/styles/home/welcome/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnity - Yapay Zeka Destekli Eğitim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/home/welcome/style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 </head>
-<body>
-  <div class="welcome-container">
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Welcome" class="welcome-image">
-    <h1 class="welcome-title">Hoş Geldiniz!</h1>
-    <p class="welcome-subtitle">
-      Base Client uygulamasına başarıyla giriş yaptınız.<br>
-      Burada modern ve kullanıcı dostu bir deneyim sizi bekliyor.
-    </p>
-    <a href="/" class="welcome-btn">Ana Sayfaya Git</a>
-    <div style="margin-top:32px; color:#888; font-size:0.95rem;">
-      <p>Herhangi bir sorunuz olursa <a href="mailto:support@baseclient.com" style="color:#f76b1c;text-decoration:underline;">destek ekibimizle</a> iletişime geçebilirsiniz.</p>
-      <p>İyi günler dileriz!<br><b>Base Client Ekibi</b></p>
+<body class="home-page">
+
+    <div class="header-container">
+        <header class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Learnity Logo">
+                    <span class="logo-text">Learnity</span> </a>
+            </div>
+
+            <div class="search-bar-middle">
+                <input type="text" placeholder="Ne öğrenmek istersiniz?">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+
+            <nav class="main-nav-links">
+                <ul>
+                    <li class="dropdown">
+                        <a href="#">Hizmetlerimiz <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Not Çıkarma Asistanı</a>
+                            <a href="#">Soru Sorma Asistanı</a>
+                            <a href="#">Motivasyon Asistanı</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Biz Kimiz</a></li>
+                    <li><a href="#">Yardım</a></li>
+                </ul>
+            </nav>
+
+            <div class="auth-buttons">
+                <a href="/auth/login" class="nav-btn login-btn">Giriş Yap</a>
+                <a href="/auth/register" class="nav-btn register-btn">Kayıt Ol</a>
+            </div>
+        </header>
     </div>
-  </div>
-</body>
+
+    <div class="hero-section-wrapper">
+        <div class="hero-content">
+            <div class="slider-left-panel">
+                <h1 id="slider-title">Yapay Zekâ Destekli Eğitim Uygulaması Learnity ile Dijital Öğrenmede Yeni Nesil</h1>
+                <p id="slider-description">Bilginin sınırlarını zorlayın, öğrenme yolculuğunuzda size eşlik eden akıllı bir rehberle potansiyelinizi tam anlamıyla keşfedin.</p>
+                <a href="#" class="explore-button">Hizmetlerimizi Keşfedin</a>
+            </div>
+            <div class="slider-right-panel">
+                <img src="https://via.placeholder.com/600x400/0000FF/FFFFFF?text=Dinamik+Video+Alanı" alt="Dinamik İçerik Videosu" class="dynamic-video-placeholder">
+                <div class="slider-arrows">
+                    <button class="arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script> </body>
 </html>
