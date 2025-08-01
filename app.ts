@@ -49,3 +49,4 @@ import logger from "./services/logger";
         console.error("Error:", error instanceof Error ? error.message : error);
     }
 })();
+
