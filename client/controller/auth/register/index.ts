@@ -24,7 +24,7 @@ const postRegisterPage = async (
             confirmPassword: userData.confirmPassword
         });
 
-        return res.redirect("/dashboard");
+        return res.redirect("/auth/login");
 
     } catch (error) {
         console.error("İstekte bir hata gerçekleşti:", error instanceof AxiosError && error.response?.data);
