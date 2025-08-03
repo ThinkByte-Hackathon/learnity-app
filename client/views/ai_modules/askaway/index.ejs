@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskAway - AI Soru Asistanı | Learnity</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/styles/ai_modules/askaway/style.css">
+</head>
+
+<body class="askaway-page">
+    <!-- Header Container -->
+    <div class="header-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="logo.png" alt="Learnity Logo">
+                    <span class="logo-text">Learnity</span>
+                </a>
+            </div>
+            
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb">
+                <a href="/">Ana Sayfa</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/ai_modules/nothor">AI Modülleri</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>AskAway</span>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="profile-info">
+                    <img src="profile.png" alt="Profil" class="profile-avatar">
+                    <span class="profile-name">Kullanıcı</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <i class="fas fa-comments"></i>
+                    AskAway - AI Soru Asistanı
+                </h1>
+                <p class="page-description">
+                    Aklına takılan her şeyi sor! Metin, ses veya görsel ile AI asistanından yardım al.
+                </p>
+            </div>
+        </div>
+
+        <!-- Chat Module -->
+        <div class="ask-away-container">
+            <div class="ask-away-module">
+                <div class="chat-area" id="chat-area">
+                    <div class="message received">
+                        <div class="message-content">
+                            <p>Merhaba! Ben AskAway AI asistanınım. 🤖</p>
+                            <p>Aklına takılan her şeyi sorabilirsin. Metin, ses veya görsel yükleyerek bana ulaşabilirsin.</p>
+                            <p>Matematik, fen bilimleri, dil dersleri ve daha fazlası için buradayım!</p>
+                        </div>
+                        <div class="message-time">
+                            <span id="welcome-time"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-area">
+                    <label for="image-upload" class="input-icon image-upload-btn" title="Görsel Yükle">
+                        <i class="fas fa-image"></i>
+                    </label>
+                    <input type="file" id="image-upload" accept="image/*" style="display:none;">
+
+                    <div class="input-field">
+                        <textarea id="message-input" placeholder="Sorunu buraya yaz..." rows="1"></textarea>
+                    </div>
+
+                    <button class="input-icon voice-btn" id="voice-btn" title="Sesli Mesaj">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    
+                    <button class="input-icon send-btn" id="send-btn" title="Gönder">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sayfa yüklendiğinde zamanı göster
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('tr-TR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            document.getElementById('welcome-time').textContent = timeString;
+            
+            // Textarea auto-resize
+            const textarea = document.getElementById('message-input');
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+            
+            // Enter ile gönderme
+            textarea.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Send button click
+            document.getElementById('send-btn').addEventListener('click', sendMessage);
+        });
+        
+        function sendMessage() {
+            const textarea = document.getElementById('message-input');
+            const message = textarea.value.trim();
+            
+            if (message) {
+                // Kullanıcı mesajını ekle
+                addMessage(message, 'sent');
+                textarea.value = '';
+                textarea.style.height = 'auto';
+                
+                // AI yanıtını simüle et (gerçek API entegrasyonu için)
+                setTimeout(() => {
+                    addMessage('Bu özellik yakında aktif olacak! 🚀', 'received');
+                }, 1000);
+            }
+        }
+        
+        function addMessage(content, type) {
+            const chatArea = document.getElementById('chat-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('tr-TR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${content}</p>
+                </div>
+                <div class="message-time">
+                    <span>${timeString}</span>
+                </div>
+            `;
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>
