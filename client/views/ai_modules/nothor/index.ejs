@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Destekli Not Asistanı - Learnity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/ai_modules/nothor/style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body class="nothor-page">
+
+    <!-- Header Navigation -->
+    <div class="header-container">
+        <header class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="images/logo.png" alt="Learnity Logo">
+                    <span class="logo-text">Learnity</span>
+                </a>
+            </div>
+            
+            <nav class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="separator">></span>
+                <span class="current">AI Not Asistanı</span>
+            </nav>
+
+            <div class="user-menu">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-robot"></i>
+                AI Destekli Not Asistanı
+            </h1>
+            <p class="page-description">
+                Yapay zeka desteğiyle not alma deneyiminizi geliştirin. İki farklı modülden birini seçerek başlayın.
+            </p>
+        </div>
+
+        <div class="modules-grid">
+            <!-- AI Sıfırdan Not Oluşturur -->
+            <div class="module-card generate-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>AI Sıfırdan Not Oluşturur</h3>
+                </div>
+                <div class="card-content">
+                    <p>Öğrenmek istediğiniz konuyu belirtin, AI sizin için detaylı ve kapsamlı notlar oluştursun.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Konu bazlı not oluşturma</li>
+                        <li><i class="fas fa-check"></i> Detay seviyesi seçimi</li>
+                        <li><i class="fas fa-check"></i> Örnekler ve açıklamalar</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="/ai_modules/nothor/generate_nothor" class="btn btn-primary">
+                        <i class="fas fa-magic"></i>
+                        Not Oluşturmaya Başla
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kendi Notunu Al, AI Tamamlasın -->
+            <div class="module-card complete-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Kendi Notunu Al, AI Tamamlasın</h3>
+                </div>
+                <div class="card-content">
+                    <p>Kendi notlarınızı yazın, AI eksik kısımları tamamlasın, hataları düzeltsin ve içeriği zenginleştirsin.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Hata düzeltme</li>
+                        <li><i class="fas fa-check"></i> İçerik tamamlama</li>
+                        <li><i class="fas fa-check"></i> Yapı iyileştirme</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="/ai_modules/nothor/complete_nothor" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i>
+                        Notumu Tamamlat
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- İstatistikler Bölümü -->
+        <div class="stats-section">
+            <h2 class="stats-title">Kullanım İstatistikleri</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Oluşturulan Not</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Toplam Süre (dk)</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Favori Not</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modül kartlarına tıklama eventi
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const module = this.dataset.module;
+                if (module === 'ai-generate') {
+                    // AI sıfırdan not oluşturma sayfasına yönlendir
+                    window.location.href = '/ai_modules/nothor/generate_nothor';
+                } else if (module === 'ai-complete') {
+                    // Kişi not alır AI tamamlar sayfasına yönlendir
+                    window.location.href = '/ai_modules/nothor/complete_nothor';
+                }
+            });
+        });
+
+        // Butonlara tıklama eventi
+        document.querySelectorAll('.module-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.module-card');
+                const module = card.dataset.module;
+                
+                if (module === 'ai-generate') {
+                    window.location.href = '/ai_modules/nothor/generate_nothor';
+                } else if (module === 'ai-complete') {
+                    window.location.href = '/ai_modules/nothor/complete_nothor';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

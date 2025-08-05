@@ -2,22 +2,38 @@ import express from "express";
 const router = express.Router();
 import registerRoutes from "./services/registerRoutes";
 import { ControllerGroup } from "@/types/controllerAttributes";
-import { getAskAwayPage, sendChatMessage, analyzeChatImage, clearChatHistory, sendGeminiRequest } from "./controller/ai_modules/askaway";
 
 // PAGE IMPORTS:
 import { getWelcomePage } from "./controller/home/welcome";
 import { getLoginPage, postLoginPage } from "./controller/auth/login";
 import { getRegisterPage, postRegisterPage } from "./controller/auth/register";
 import { getDashboardPage } from "./controller/home/dashboard";
+import { getNothorPage } from "./controller/ai_modules/nothor";
+import { getGenerateNothorPage, createNote } from "./controller/ai_modules/nothor/generate_nothor";
+import { getCompleteNothorPage, completeNote } from "./controller/ai_modules/nothor/complete_nothor";
+import { getAskAwayPage } from "./controller/ai_modules/askaway";
 
 // ROUTES:
-
 export const endpoints: ControllerGroup = {
-    home: {
+    "": {
         GET: { handler: getWelcomePage, auth: false },
     },
     dashboard: {
         GET: { handler: getDashboardPage, auth: true }
+    },
+    "ai_modules/nothor": {
+        GET: { handler: getNothorPage, auth: false }
+    },
+    "ai_modules/nothor/generate_nothor": {
+        GET: { handler: getGenerateNothorPage, auth: false },
+        POST: { handler: createNote, auth: false }
+    },
+    "ai_modules/nothor/complete_nothor": {
+        GET: { handler: getCompleteNothorPage, auth: false },
+        POST: { handler: completeNote, auth: false }
+    },
+    "ai_modules/askaway": {
+        GET: { handler: getAskAwayPage, auth: false }
     },
     auth: {
         login: {
@@ -27,25 +43,6 @@ export const endpoints: ControllerGroup = {
         register: {
             GET: { handler: getRegisterPage, auth: false },
             POST: { handler: postRegisterPage, auth: false }
-        }
-    },
-    chat: {
-        home: {
-            GET: {handler: getAskAwayPage, auth: false}
-        },
-        send: {
-            GET: {handler: sendChatMessage, auth: false}
-        },
-        image: {
-            GET: {handler: analyzeChatImage, auth: false}
-        },
-        history: {
-            GET: {handler: clearChatHistory, auth: false}
-        }
-    },
-    gemini: {
-        send: {
-            POST: {handler: sendGeminiRequest, auth: true}
         }
     }
 }

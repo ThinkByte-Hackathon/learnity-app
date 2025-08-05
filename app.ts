@@ -16,6 +16,7 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 
 // View Engine:
@@ -49,4 +50,3 @@ import logger from "./services/logger";
         console.error("Error:", error instanceof Error ? error.message : error);
     }
 })();
-

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendi Notunu Al, AI Tamamlasın - Learnity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/ai_modules/nothor/complete_nothor/style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="complete-page">
+
+    <!-- Header Navigation -->
+    <div class="header-container">
+        <header class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="images/logo.png" alt="Learnity Logo">
+                    <span class="logo-text">Learnity</span>
+                </a>
+            </div>
+            
+            <nav class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="separator">></span>
+                <a href="/ai_modules/nothor">AI Not Asistanı</a>
+                <span class="separator">></span>
+                <span class="current">Kendi Notunu Al, AI Tamamlasın</span>
+            </nav>
+        </header>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Kendi Notunu Al, AI Tamamlasın</h1>
+            <p>Kendi notlarınızı yazın, AI eksik kısımları tamamlayacak, hataları düzeltsin ve içeriği zenginleştirsin.</p>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Input Section - Kendi Notunu Al, AI Tamamlasın -->
+            <div class="input-section">
+                <div class="input-card">
+                    <h3 class="input-title">
+                        <i class="fas fa-edit"></i>
+                        Notunuzu Yazın
+                    </h3>
+                    
+                    <div class="note-input-group">
+                        <label for="user-note-input">Kendi notunuzu buraya yazın:</label>
+                        <textarea 
+                            id="user-note-input" 
+                            placeholder="Notlarınızı buraya yazın... AI eksik kısımları tamamlayacak, hataları düzeltecek ve içeriği zenginleştirecek."
+                            rows="8"
+                        ></textarea>
+                    </div>
+
+                    <div class="options-group">
+                        <h4>AI Yardım Türü</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="fix-errors" checked>
+                                <span class="checkbox-custom"></span>
+                                Hataları düzelt
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="complete-content" checked>
+                                <span class="checkbox-custom"></span>
+                                Eksik kısımları tamamla
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="improve-structure">
+                                <span class="checkbox-custom"></span>
+                                Yapıyı iyileştir
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="add-examples">
+                                <span class="checkbox-custom"></span>
+                                Örnekler ekle
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="options-group">
+                        <h4>İyileştirme Seviyesi</h4>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="improvement-level" value="minimal" checked>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Minimal</strong>
+                                    <span>Sadece açık hataları düzelt</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="improvement-level" value="moderate">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Orta</strong>
+                                    <span>Hatalar + eksik bilgiler</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="improvement-level" value="comprehensive">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Kapsamlı</strong>
+                                    <span>Tam iyileştirme + zenginleştirme</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="complete-btn" id="complete-notes-btn">
+                        <i class="fas fa-edit"></i>
+                        <span class="btn-text">Notumu Tamamla</span>
+                        <div class="loading-spinner" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Saved Notes Section - Not Depolama Alanı -->
+            <div class="saved-notes-section">
+                <div class="saved-notes-card">
+                    <div class="saved-notes-header">
+                        <h3 class="saved-notes-title">
+                            <i class="fas fa-bookmark"></i>
+                            Kayıtlı Notlarım
+                        </h3>
+                        <div class="notes-actions">
+                            <button class="action-btn search-btn" id="search-notes-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="action-btn filter-btn" id="filter-notes-btn">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="search-bar" id="search-bar" style="display: none;">
+                        <input type="text" id="search-input" placeholder="Notlarda ara...">
+                        <button class="search-close-btn" id="search-close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="notes-list" id="notes-list">
+                    </div>
+
+                    <div class="notes-pagination" id="notes-pagination" style="display: none;">
+                        <button class="pagination-btn" id="prev-page-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="page-info" id="page-info">1 / 1</span>
+                        <button class="pagination-btn" id="next-page-btn" disabled>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output Section - Tamamlanan Not Önizleme -->
+        <div class="output-section" id="output-section" style="display: none;">
+            <div class="output-card">
+                <div class="output-header">
+                    <h3 class="output-title">
+                        <i class="fas fa-file-alt"></i>
+                        AI Tarafından Tamamlanan Not
+                    </h3>
+                    <div class="output-actions">
+                        <button class="action-btn save-note-btn" id="save-note-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Kaydet
+                        </button>
+                        <button class="action-btn copy-btn" id="copy-btn">
+                            <i class="fas fa-copy"></i>
+                            Kopyala
+                        </button>
+                        <button class="action-btn download-btn" id="download-btn">
+                            <i class="fas fa-download"></i>
+                            İndir
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="output-content" id="output-content">
+                    <!-- Gemini AI tarafından tamamlanan not buraya gelecek -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Note Edit Modal -->
+        <div class="modal-overlay" id="note-edit-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>
+                        <i class="fas fa-edit"></i>
+                        Notu Düzenle
+                    </h3>
+                    <button class="modal-close-btn" onclick="closeNoteEditModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-note-title">Not Başlığı</label>
+                        <input type="text" id="edit-note-title" class="form-input" placeholder="Not başlığını girin...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-note-subject">Ders Kategorisi</label>
+                        <select id="edit-note-subject" class="form-select">
+                            <option value="auto">🤖 AI Otomatik Algılasın</option>
+                            <option value="matematik">📐 Matematik</option>
+                            <option value="geometri">📏 Geometri</option>
+                            <option value="fizik">⚡ Fizik</option>
+                            <option value="kimya">🧪 Kimya</option>
+                            <option value="biyoloji">🧬 Biyoloji</option>
+                            <option value="turkce">📝 Türkçe</option>
+                            <option value="edebiyat">📚 Türk Dili ve Edebiyatı</option>
+                            <option value="tarih">🏛️ Tarih</option>
+                            <option value="cografya">🌍 Coğrafya</option>
+                            <option value="ingilizce">🇬🇧 İngilizce</option>
+                            <option value="din">✝️ Din Kültürü ve Ahlak Bilgisi</option>
+                            <option value="felsefe">💡 Felsefe</option>
+                            <option value="diger">📋 Diğer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-note-content">Not İçeriği</label>
+                        <textarea id="edit-note-content" class="form-textarea" rows="10" placeholder="Not içeriğini düzenleyin..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeNoteEditModal()">
+                        <i class="fas fa-times"></i>
+                        İptal
+                    </button>
+                    <button class="btn btn-danger" onclick="deleteCurrentNote()">
+                        <i class="fas fa-trash"></i>
+                        Sil
+                    </button>
+                    <button class="btn btn-primary" onclick="saveEditedNote()">
+                        <i class="fas fa-save"></i>
+                        Kaydet
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h3><i class="fas fa-lightbulb"></i> İpuçları</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Taslak Halinde Yazın</h4>
+                    <p>Notlarınızı taslak halinde yazın, AI eksik kısımları tamamlayacak.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Ana Başlıkları Belirtin</h4>
+                    <p>Hangi konuları ele almak istediğinizi ana başlıklar halinde yazın.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Eksik Kısımları İşaretleyin</h4>
+                    <p>"..." veya "[eksik]" gibi işaretlerle tamamlanmasını istediğiniz yerleri belirtin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Subject Classification and Management
+        let currentEditingNoteId = null;
+        
+        const subjectKeywords = {
+            matematik: ['matematik', 'sayı', 'işlem', 'denklem', 'geometri', 'algebra', 'hesap', 'çarpım', 'toplam', 'integral', 'türev', 'fonksiyon'],
+            geometri: ['geometri', 'üçgen', 'kare', 'daire', 'alan', 'çevre', 'açı', 'kenar', 'şekil', 'prizma', 'küp'],
+            fizik: ['fizik', 'kuvvet', 'hareket', 'enerji', 'hız', 'ivme', 'elektrik', 'manyetik', 'ışık', 'ses', 'basınç', 'sıcaklık'],
+            kimya: ['kimya', 'element', 'atom', 'molekül', 'reaksiyon', 'asit', 'baz', 'periyodik', 'karbon', 'oksijen', 'hidrojen'],
+            biyoloji: ['biyoloji', 'hücre', 'organ', 'sistem', 'dna', 'gen', 'protein', 'mitoz', 'fotosentez', 'solunum', 'sindirim'],
+            turkce: ['türkçe', 'dil', 'gramer', 'cümle', 'kelime', 'yazım', 'imla', 'noktalama', 'fiil', 'isim', 'sıfat'],
+            edebiyat: ['edebiyat', 'şiir', 'roman', 'hikaye', 'yazar', 'şair', 'eser', 'nazım', 'nesir', 'divan', 'halk'],
+            tarih: ['tarih', 'osmanlı', 'selçuklu', 'cumhuriyet', 'savaş', 'antlaşma', 'devrim', 'reform', 'padişah', 'sultan'],
+            cografya: ['coğrafya', 'harita', 'iklim', 'nüfus', 'şehir', 'ülke', 'kıta', 'deniz', 'dağ', 'nehir', 'ekonomi'],
+            ingilizce: ['english', 'grammar', 'vocabulary', 'tense', 'verb', 'noun', 'adjective', 'sentence', 'present', 'past'],
+            din: ['din','din kültürü','din kültürü ve ahlak bilgisi','islam', 'kuran', 'hadis', 'peygamber', 'allah', 'namaz', 'oruç', 'hac', 'zekat', 'ahlak', 'ibadet', 'dua'],
+            felsefe: ['felsefe','felsefe ve etik','felsefe ve ahlak','düşünce', 'mantık', 'etik', 'ahlak', 'varlık', 'bilgi', 'hakikat', 'özgürlük', 'adalet', 'güzellik', 'platon', 'aristoteles']
+        };
+
+        function detectSubject(content) {
+            const text = content.toLowerCase();
+            let maxScore = 0;
+            let detectedSubject = 'diger';
+
+            for (const [subject, keywords] of Object.entries(subjectKeywords)) {
+                let score = 0;
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(keyword, 'gi');
+                    const matches = text.match(regex);
+                    if (matches) {
+                        score += matches.length;
+                    }
+                });
+                
+                if (score > maxScore) {
+                    maxScore = score;
+                    detectedSubject = subject;
+                }
+            }
+
+            return detectedSubject;
+        }
+
+        function getSubjectInfo(subject) {
+            const subjectMap = {
+                matematik: { name: 'Matematik', icon: '📐', color: '#ff6b6b' },
+                geometri: { name: 'Geometri', icon: '📏', color: '#4ecdc4' },
+                fizik: { name: 'Fizik', icon: '⚡', color: '#45b7d1' },
+                kimya: { name: 'Kimya', icon: '🧪', color: '#f9ca24' },
+                biyoloji: { name: 'Biyoloji', icon: '🧬', color: '#6c5ce7' },
+                turkce: { name: 'Türkçe', icon: '📝', color: '#a29bfe' },
+                edebiyat: { name: 'Türk Dili ve Edebiyatı', icon: '📚', color: '#fd79a8' },
+                tarih: { name: 'Tarih', icon: '🏛️', color: '#e17055' },
+                cografya: { name: 'Coğrafya', icon: '🌍', color: '#00b894' },
+                ingilizce: { name: 'İngilizce', icon: '🇬🇧', color: '#0984e3' },
+                din: { name: 'Din Kültürü ve Ahlak Bilgisi', icon: '✝️', color: '#8e44ad' },
+                felsefe: { name: 'Felsefe', icon: '💡', color: '#2ecc71' },
+                diger: { name: 'Diğer', icon: '📋', color: '#636e72' }
+            };
+            return subjectMap[subject] || subjectMap.diger;
+        }
+
+        // Note Management Functions
+        let savedNotes = JSON.parse(localStorage.getItem('learnity_saved_notes') || '[]');
+        let currentPage = 1;
+        const notesPerPage = 5;
+        let filteredNotes = savedNotes;
+
+        function displaySavedNotes() {
+            const notesList = document.getElementById('notes-list');
+            const pagination = document.getElementById('notes-pagination');
+            
+            if (filteredNotes.length === 0) {
+                notesList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-sticky-note"></i>
+                        <h4>Henüz kayıtlı notunuz yok</h4>
+                        <p>AI ile tamamlanan notlar burada görünecek</p>
+                    </div>
+                `;
+                pagination.style.display = 'none';
+                return;
+            }
+
+            const startIndex = (currentPage - 1) * notesPerPage;
+            const endIndex = startIndex + notesPerPage;
+            const currentNotes = filteredNotes.slice(startIndex, endIndex);
+            
+            notesList.innerHTML = currentNotes.map(note => {
+                const subjectInfo = getSubjectInfo(note.subject || 'diger');
+                return `
+                    <div class="note-item subject-${note.subject || 'diger'}" data-note-id="${note.id}" onclick="openNoteEditModal('${note.id}')">
+                        <div class="note-content">
+                            <div class="note-header-with-subject">
+                                <span class="subject-icon ${note.subject || 'diger'}">${subjectInfo.icon}</span>
+                                <h4 class="note-title">${note.title}</h4>
+                            </div>
+                            <p class="note-preview">${note.preview}</p>
+                            <div class="note-meta">
+                                <span class="note-date">
+                                    <i class="fas fa-calendar"></i>
+                                    ${new Date(note.createdAt).toLocaleDateString('tr-TR')}
+                                </span>
+                                <span class="note-subject">
+                                    <i class="fas fa-tag"></i>
+                                    ${subjectInfo.name}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="note-actions" onclick="event.stopPropagation()">
+                            <button class="note-action-btn view-btn" onclick="viewNote('${note.id}')" title="Notu Görüntüle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="note-action-btn edit-btn" onclick="openNoteEditModal('${note.id}')" title="Notu Düzenle">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="note-action-btn delete-btn" onclick="deleteNote('${note.id}')" title="Notu Sil">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Update pagination
+            const totalPages = Math.ceil(filteredNotes.length / notesPerPage);
+            if (totalPages > 1) {
+                pagination.style.display = 'flex';
+                document.getElementById('page-info').textContent = `${currentPage} / ${totalPages}`;
+                document.getElementById('prev-page-btn').disabled = currentPage === 1;
+                document.getElementById('next-page-btn').disabled = currentPage === totalPages;
+            } else {
+                pagination.style.display = 'none';
+            }
+        }
+
+        function viewNote(noteId) {
+            const note = savedNotes.find(n => n.id === noteId);
+            if (note) {
+                document.getElementById('output-content').innerHTML = note.content;
+                document.getElementById('output-section').style.display = 'block';
+                document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function deleteNote(noteId) {
+            if (confirm('Bu notu silmek istediğinizden emin misiniz?')) {
+                savedNotes = savedNotes.filter(note => note.id !== noteId);
+                localStorage.setItem('learnity_saved_notes', JSON.stringify(savedNotes));
+                filteredNotes = savedNotes;
+                displaySavedNotes();
+            }
+        }
+
+        function searchNotes() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            filteredNotes = savedNotes.filter(note => 
+                note.title.toLowerCase().includes(searchTerm) ||
+                note.topic.toLowerCase().includes(searchTerm) ||
+                note.preview.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1;
+            displaySavedNotes();
+        }
+
+        // Search functionality
+        document.getElementById('search-notes-btn').addEventListener('click', function() {
+            const searchBar = document.getElementById('search-bar');
+            const isVisible = searchBar.style.display !== 'none';
+            searchBar.style.display = isVisible ? 'none' : 'block';
+            if (!isVisible) {
+                document.getElementById('search-input').focus();
+            }
+        });
+
+        document.getElementById('search-close-btn').addEventListener('click', function() {
+            document.getElementById('search-bar').style.display = 'none';
+            document.getElementById('search-input').value = '';
+            filteredNotes = savedNotes;
+            displaySavedNotes();
+        });
+
+        document.getElementById('search-input').addEventListener('input', searchNotes);
+
+        // Filter functionality
+        document.getElementById('filter-notes-btn').addEventListener('click', function() {
+            if (filteredNotes.length === savedNotes.length) {
+                filteredNotes = savedNotes.filter(note => note.type === 'completed');
+                this.style.background = '#764ba2';
+                this.style.color = 'white';
+                this.title = 'Tüm Notları Göster';
+            } else {
+                filteredNotes = savedNotes;
+                this.style.background = '';
+                this.style.color = '';
+                this.title = 'Sadece Tamamlanan Notları Göster';
+            }
+            currentPage = 1;
+            displaySavedNotes();
+        });
+
+        // Pagination
+        document.getElementById('prev-page-btn').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                displaySavedNotes();
+            }
+        });
+
+        document.getElementById('next-page-btn').addEventListener('click', function() {
+            const totalPages = Math.ceil(filteredNotes.length / notesPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displaySavedNotes();
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySavedNotes();
+        });
+
+        // Complete Notes Button Click Handler
+        document.getElementById('complete-notes-btn').addEventListener('click', async function() {
+            const userNote = document.getElementById('user-note-input').value.trim();
+            
+            if (!userNote) {
+                alert('Lütfen notunuzu yazın.');
+                return;
+            }
+
+            // Get user preferences
+            const improvementLevel = document.querySelector('input[name="improvement-level"]:checked').value;
+            const fixErrors = document.getElementById('fix-errors').checked;
+            const completeContent = document.getElementById('complete-content').checked;
+            const improveStructure = document.getElementById('improve-structure').checked;
+            const addExamples = document.getElementById('add-examples').checked;
+
+            // Show loading state
+            const btn = this;
+            const btnText = btn.querySelector('.btn-text');
+            const spinner = btn.querySelector('.loading-spinner');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+
+            try {
+                // Prepare help types array
+                const helpTypes = [];
+                if (fixErrors) helpTypes.push('fix-errors');
+                if (completeContent) helpTypes.push('complete-content');
+                if (improveStructure) helpTypes.push('improve-structure');
+                if (addExamples) helpTypes.push('add-examples');
+
+                // Real API call to backend - seçeneklerle birlikte gönder
+                const response = await axios.post('/ai_modules/nothor/complete_nothor', {
+                    userNote: userNote,
+                    improvementLevel: improvementLevel,
+                    helpTypes: helpTypes
+                });
+                
+                if (response.data.success) {
+                    const noteData = {
+                        userNote: userNote,
+                        content: response.data.data.content,
+                        createdAt: response.data.data.createdAt,
+                        improvementLevel: improvementLevel,
+                        helpTypes: helpTypes
+                    };
+                    
+                    displayCompletedNote(noteData);
+                    
+                    // Clear form
+                    document.getElementById('user-note-input').value = '';
+                    document.querySelector('input[name="improvement-level"]:checked').checked = false;
+                    document.getElementById('fix-errors').checked = true;
+                    document.getElementById('complete-content').checked = true;
+                    document.getElementById('improve-structure').checked = false;
+                    document.getElementById('add-examples').checked = false;
+                } else {
+                    throw new Error(response.data.message || 'Not tamamlanamadı.');
+                }
+                
+            } catch (error) {
+                console.error('Note completion error:', error);
+                let errorMessage = 'Not tamamlanırken bir hata oluştu.';
+                
+                if (error.response) {
+                    errorMessage = error.response.data.message || errorMessage;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                alert(errorMessage);
+            } finally {
+                // Reset button state
+                btn.disabled = false;
+                btnText.style.display = 'inline-block';
+                spinner.style.display = 'none';
+            }
+        });
+
+        function displayCompletedNote(noteData) {
+            const outputContent = document.getElementById('output-content');
+            const outputSection = document.getElementById('output-section');
+            
+            // İyileştirme seviyesi metinleri
+            const levelTexts = {
+                'minimal': 'Minimal İyileştirme',
+                'moderate': 'Orta Seviye İyileştirme',
+                'comprehensive': 'Kapsamlı İyileştirme'
+            };
+            
+            // Yardım türleri metinleri
+            const helpTypeTexts = {
+                'fix-errors': 'Hata Düzeltme',
+                'complete-content': 'İçerik Tamamlama',
+                'improve-structure': 'Yapı İyileştirme',
+                'add-examples': 'Örnek Ekleme'
+            };
+            
+            // Seçilen yardım türlerini formatla
+            const selectedHelpTypes = noteData.helpTypes ? 
+                noteData.helpTypes.map(type => helpTypeTexts[type] || type).join(', ') : 
+                'Genel İyileştirme';
+            
+            outputContent.innerHTML = `
+                <div class="completed-note">
+                    <div class="original-note">
+                        <h3>📝 Orijinal Notunuz:</h3>
+                        <div class="original-content">
+                            ${noteData.userNote.replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                    
+                    <div class="improved-note">
+                        <h3>✨ AI Tarafından İyileştirilmiş Not:</h3>
+                        <div class="note-header-info">
+                            <div class="note-meta-info">
+                                <span class="improvement-level">${levelTexts[noteData.improvementLevel] || 'AI İyileştirme'}</span>
+                                <span class="help-types">${selectedHelpTypes}</span>
+                                <span class="completion-date">${new Date(noteData.createdAt).toLocaleDateString('tr-TR')}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="note-content">
+                            <div class="improved-content">
+                                ${noteData.content.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            outputSection.style.display = 'block';
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Save note button handler
+        document.getElementById('save-note-btn').addEventListener('click', function() {
+            const outputContent = document.getElementById('output-content').innerHTML;
+            const userNote = document.getElementById('user-note-input').value.trim();
+            
+            if (!outputContent || outputContent === '<!-- Gemini AI tarafından tamamlanan not buraya gelecek -->') {
+                alert('Kaydedilecek not bulunamadı!');
+                return;
+            }
+
+            // AI ile ders kategorisini otomatik algıla
+            const detectedSubject = detectSubject(outputContent + ' ' + userNote);
+
+            const note = {
+                id: Date.now().toString(),
+                title: userNote.substring(0, 50) + (userNote.length > 50 ? '...' : ''),
+                topic: 'Tamamlanan Not',
+                content: outputContent,
+                preview: outputContent.replace(/<[^>]*>/g, '').substring(0, 100) + '...',
+                createdAt: new Date().toISOString(),
+                type: 'completed', // Completed note type
+                subject: detectedSubject // AI tarafından algılanan ders
+            };
+
+            savedNotes.unshift(note);
+            localStorage.setItem('learnity_saved_notes', JSON.stringify(savedNotes));
+            filteredNotes = savedNotes;
+            displaySavedNotes();
+            
+            const subjectInfo = getSubjectInfo(detectedSubject);
+            alert(`Not başarıyla kaydedildi!\n🎯 Algılanan Ders: ${subjectInfo.icon} ${subjectInfo.name}`);
+        });
+
+        function openNoteEditModal(noteId) {
+            const note = savedNotes.find(n => n.id === noteId);
+            if (note) {
+                currentEditingNoteId = noteId;
+                document.getElementById('edit-note-title').value = note.title;
+                document.getElementById('edit-note-subject').value = note.subject || 'auto';
+                document.getElementById('edit-note-content').value = note.content.replace(/<[^>]*>/g, '');
+                document.getElementById('note-edit-modal').style.display = 'block';
+            }
+        }
+
+        function closeNoteEditModal() {
+            document.getElementById('note-edit-modal').style.display = 'none';
+            currentEditingNoteId = null;
+        }
+
+        function saveEditedNote() {
+            if (!currentEditingNoteId) return;
+            
+            const noteIndex = savedNotes.findIndex(n => n.id === currentEditingNoteId);
+            if (noteIndex !== -1) {
+                const title = document.getElementById('edit-note-title').value;
+                const selectedSubject = document.getElementById('edit-note-subject').value;
+                const content = document.getElementById('edit-note-content').value;
+                
+                // Auto-detect subject if selected
+                const subject = selectedSubject === 'auto' ? detectSubject(content) : selectedSubject;
+                
+                savedNotes[noteIndex].title = title;
+                savedNotes[noteIndex].subject = subject;
+                savedNotes[noteIndex].content = content;
+                savedNotes[noteIndex].preview = content.substring(0, 100) + '...';
+                
+                localStorage.setItem('learnity_saved_notes', JSON.stringify(savedNotes));
+                filteredNotes = savedNotes;
+                displaySavedNotes();
+                closeNoteEditModal();
+                
+                alert('Not başarıyla güncellendi!');
+            }
+        }
+
+        function deleteCurrentNote() {
+            if (!currentEditingNoteId) return;
+            
+            if (confirm('Bu notu silmek istediğinizden emin misiniz?')) {
+                savedNotes = savedNotes.filter(note => note.id !== currentEditingNoteId);
+                localStorage.setItem('learnity_saved_notes', JSON.stringify(savedNotes));
+                filteredNotes = savedNotes;
+                displaySavedNotes();
+                closeNoteEditModal();
+                
+                alert('Not başarıyla silindi!');
+            }
+        }
+
+        function deleteNote(noteId) {
+            if (confirm('Bu notu silmek istediğinizden emin misiniz?')) {
+                savedNotes = savedNotes.filter(note => note.id !== noteId);
+                localStorage.setItem('learnity_saved_notes', JSON.stringify(savedNotes));
+                filteredNotes = savedNotes;
+                displaySavedNotes();
+            }
+        }
+
+        // Subject Category Management
+        let currentSelectedSubject = null;
+        let isShowingSubjectNotes = false;
+
+        function displaySubjectCategories() {
+            const notesList = document.getElementById('notes-list');
+            const subjectCounts = {};
+            
+            // Count notes by subject
+            savedNotes.forEach(note => {
+                const subject = note.subject || 'diger';
+                subjectCounts[subject] = (subjectCounts[subject] || 0) + 1;
+            });
+
+            const subjects = [
+                'matematik', 'geometri', 'fizik', 'kimya', 'biyoloji',
+                'turkce', 'edebiyat', 'tarih', 'cografya', 'ingilizce', 'din', 'felsefe', 'diger'
+            ];
+
+            if (Object.keys(subjectCounts).length === 0) {
+                notesList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-sticky-note"></i>
+                        <h4>Henüz kayıtlı notunuz yok</h4>
+                        <p>AI ile tamamlanan notlar burada görünecek</p>
+                    </div>
+                `;
+                return;
+            }
+
+            notesList.innerHTML = `
+                <div class="subject-categories-header">
+                    <h3><i class="fas fa-layer-group"></i> Ders Kategorileri</h3>
+                    <p>Notlarınız ders türüne göre gruplandırılmıştır</p>
+                </div>
+                <div class="subject-categories-grid">
+                    ${subjects.map(subject => {
+                        const subjectInfo = getSubjectInfo(subject);
+                        const count = subjectCounts[subject] || 0;
+                        return `
+                            <div class="subject-category-card ${count === 0 ? 'empty' : ''}" 
+                                 onclick="showSubjectNotes('${subject}')" 
+                                 data-subject="${subject}">
+                                <div class="subject-card-icon">${subjectInfo.icon}</div>
+                                <div class="subject-card-name">${subjectInfo.name}</div>
+                                <div class="subject-card-count">${count} not</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            // Hide pagination when showing categories
+            document.getElementById('notes-pagination').style.display = 'none';
+        }
+
+        function showSubjectNotes(subject) {
+            currentSelectedSubject = subject;
+            isShowingSubjectNotes = true;
+            
+            const subjectNotes = savedNotes.filter(note => (note.subject || 'diger') === subject);
+            const subjectInfo = getSubjectInfo(subject);
+            const notesList = document.getElementById('notes-list');
+
+            if (subjectNotes.length === 0) {
+                notesList.innerHTML = `
+                    <div class="subject-notes-header">
+                        <button class="back-to-categories-btn" onclick="backToCategories()">
+                            <i class="fas fa-arrow-left"></i> Kategorilere Dön
+                        </button>
+                        <h3>${subjectInfo.icon} ${subjectInfo.name} Notları</h3>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-sticky-note"></i>
+                        <h4>Bu derste henüz notunuz yok</h4>
+                        <p>AI ile ${subjectInfo.name.toLowerCase()} notları tamamlayın</p>
+                    </div>
+                `;
+                return;
+            }
+
+            notesList.innerHTML = `
+                <div class="subject-notes-header">
+                    <button class="back-to-categories-btn" onclick="backToCategories()">
+                        <i class="fas fa-arrow-left"></i> Kategorilere Dön
+                    </button>
+                    <h3>${subjectInfo.icon} ${subjectInfo.name} Notları (${subjectNotes.length})</h3>
+                </div>
+                <div class="subject-notes-list">
+                    ${subjectNotes.map(note => `
+                        <div class="subject-note-item" onclick="openNoteEditModal('${note.id}')">
+                            <div class="subject-note-content">
+                                <h4 class="subject-note-title">${note.title}</h4>
+                                <p class="subject-note-preview">${note.preview}</p>
+                                <div class="subject-note-date">
+                                    <i class="fas fa-calendar"></i>
+                                    ${new Date(note.createdAt).toLocaleDateString('tr-TR')}
+                                </div>
+                            </div>
+                            <div class="subject-note-actions" onclick="event.stopPropagation()">
+                                <button class="note-action-btn view-btn" onclick="viewNote('${note.id}')" title="Notu Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="note-action-btn edit-btn" onclick="openNoteEditModal('${note.id}')" title="Notu Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="note-action-btn delete-btn" onclick="deleteNote('${note.id}')" title="Notu Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function backToCategories() {
+            currentSelectedSubject = null;
+            isShowingSubjectNotes = false;
+            displaySubjectCategories();
+        }
+
+        // Update the main displaySavedNotes function
+        function displaySavedNotes() {
+            if (!isShowingSubjectNotes) {
+                displaySubjectCategories();
+            } else if (currentSelectedSubject) {
+                showSubjectNotes(currentSelectedSubject);
+            }
+        }
+
+        // Search functionality update
+        function searchNotes() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                filteredNotes = savedNotes;
+                displaySavedNotes();
+                return;
+            }
+
+            // Switch to showing all matching notes when searching
+            isShowingSubjectNotes = false;
+            currentSelectedSubject = null;
+            
+            filteredNotes = savedNotes.filter(note => 
+                note.title.toLowerCase().includes(searchTerm) ||
+                note.content.toLowerCase().includes(searchTerm) ||
+                getSubjectInfo(note.subject || 'diger').name.toLowerCase().includes(searchTerm)
+            );
+
+            const notesList = document.getElementById('notes-list');
+            
+            if (filteredNotes.length === 0) {
+                notesList.innerHTML = `
+                    <div class="search-results-header">
+                        <button class="back-to-categories-btn" onclick="clearSearch()">
+                            <i class="fas fa-times"></i> Aramayı Temizle
+                        </button>
+                        <h3><i class="fas fa-search"></i> Arama Sonuçları</h3>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h4>"${searchTerm}" için sonuç bulunamadı</h4>
+                        <p>Farklı anahtar kelimeler deneyin</p>
+                    </div>
+                `;
+                return;
+            }
+
+            notesList.innerHTML = `
+                <div class="search-results-header">
+                    <button class="back-to-categories-btn" onclick="clearSearch()">
+                        <i class="fas fa-times"></i> Aramayı Temizle
+                    </button>
+                    <h3><i class="fas fa-search"></i> Arama Sonuçları (${filteredNotes.length})</h3>
+                </div>
+                <div class="search-results-list">
+                    ${filteredNotes.map(note => {
+                        const subjectInfo = getSubjectInfo(note.subject || 'diger');
+                        return `
+                            <div class="search-result-item subject-${note.subject || 'diger'}" onclick="openNoteEditModal('${note.id}')">
+                                <div class="search-result-content">
+                                    <div class="note-header-with-subject">
+                                        <span class="subject-icon ${note.subject || 'diger'}">${subjectInfo.icon}</span>
+                                        <h4 class="note-title">${note.title}</h4>
+                                    </div>
+                                    <p class="note-preview">${note.preview}</p>
+                                    <div class="note-meta">
+                                        <span class="note-date">
+                                            <i class="fas fa-calendar"></i>
+                                            ${new Date(note.createdAt).toLocaleDateString('tr-TR')}
+                                        </span>
+                                        <span class="note-subject">
+                                            <i class="fas fa-tag"></i>
+                                            ${subjectInfo.name}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="note-actions" onclick="event.stopPropagation()">
+                                    <button class="note-action-btn view-btn" onclick="viewNote('${note.id}')" title="Notu Görüntüle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="note-action-btn edit-btn" onclick="openNoteEditModal('${note.id}')" title="Notu Düzenle">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="note-action-btn delete-btn" onclick="deleteNote('${note.id}')" title="Notu Sil">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            filteredNotes = savedNotes;
+            isShowingSubjectNotes = false;
+            currentSelectedSubject = null;
+            displaySavedNotes();
+        }
+    </script>
+
+</body>
+</html>

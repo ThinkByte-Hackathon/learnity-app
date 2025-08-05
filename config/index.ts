@@ -21,4 +21,4 @@ const config = {
 }
 
 export default config;
-export const { environment, port, database } = config;
+export const { environment, port, database, serverUrl } = config;
