@@ -12,6 +12,7 @@ import { getNothorPage } from "./controller/ai_modules/nothor";
 import { getGenerateNothorPage, createNote } from "./controller/ai_modules/nothor/generate_nothor";
 import { getCompleteNothorPage, completeNote } from "./controller/ai_modules/nothor/complete_nothor";
 import { getAskAwayPage } from "./controller/ai_modules/askaway";
+import { renderQuiztor, createQuestion, getQuizStats, saveQuizResults } from "./controller/ai_modules/quiztor";
 
 // ROUTES:
 export const endpoints: ControllerGroup = {
@@ -34,6 +35,18 @@ export const endpoints: ControllerGroup = {
     },
     "ai_modules/askaway": {
         GET: { handler: getAskAwayPage, auth: false }
+    },
+    "ai_modules/quiztor": {
+        GET: { handler: renderQuiztor, auth: true }
+    },
+    "gemini/createQuestion": {
+        POST: { handler: createQuestion, auth: true }
+    },
+    "api/quiztor/stats": {
+        GET: { handler: getQuizStats, auth: true }
+    },
+    "api/quiztor/results": {
+        POST: { handler: saveQuizResults, auth: true }
     },
     auth: {
         login: {
