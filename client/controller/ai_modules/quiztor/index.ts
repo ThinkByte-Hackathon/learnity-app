@@ -31,8 +31,9 @@ const createQuestion = async (
         
         // Giriş verilerini kontrol et
         if (!subject || !type || !piece) {
-            return res.status(400).render("error", {
-                message: "Konu, zorluk seviyesi ve soru sayısı gereklidir."
+            return res.status(400).json({
+                message: "Konu, zorluk seviyesi ve soru sayısı gereklidir.",
+                error: true
             });
         }
 
@@ -64,27 +65,35 @@ const createQuestion = async (
         if (apiResponse.data && apiResponse.data.message) {
             // Soruları parse et
             const parsedData = parseQuestionsFromMessage(apiResponse.data.message);
-            
-            return res.render("ai_modules/quiztor/index", {
-                questions: parsedData.questions,
-                answers: parsedData.answers,
-                subject: subject,
-                type: type,
-                piece: piece,
-                hasQuestions: true
+
+            return res.json({
+                message: "Sorular başarıyla oluşturuldu",
+                data: {
+                    message: apiResponse.data.message,
+                    questions: parsedData.questions,
+                    answers: parsedData.answers,
+                    subject: subject,
+                    type: type,
+                    piece: piece
+                }
             });
         } else {
+            console.log("else durumuna girdi");
+
             console.log("API response beklenmeyen format, mock response döndürülüyor");
             const mockMessage = generateMockQuestions(subject, type, piece);
             const parsedData = parseQuestionsFromMessage(mockMessage);
             
-            return res.render("ai_modules/quiztor/index", {
-                questions: parsedData.questions,
-                answers: parsedData.answers,
-                subject: subject,
-                type: type,
-                piece: piece,
-                hasQuestions: true
+            return res.json({
+                message: "Sorular başarıyla oluşturuldu (mock)",
+                data: {
+                    message: mockMessage,
+                    questions: parsedData.questions,
+                    answers: parsedData.answers,
+                    subject: subject,
+                    type: type,
+                    piece: piece
+                }
             });
         }
 
@@ -99,13 +108,16 @@ const createQuestion = async (
                 const mockMessage = generateMockQuestions(subject, type, piece);
                 const parsedData = parseQuestionsFromMessage(mockMessage);
                 
-                return res.render("ai_modules/quiztor/index", {
-                    questions: parsedData.questions,
-                    answers: parsedData.answers,
-                    subject: subject,
-                    type: type,
-                    piece: piece,
-                    hasQuestions: true
+                return res.json({
+                    message: "Sorular başarıyla oluşturuldu (mock - auth error)",
+                    data: {
+                        message: mockMessage,
+                        questions: parsedData.questions,
+                        answers: parsedData.answers,
+                        subject: subject,
+                        type: type,
+                        piece: piece
+                    }
                 });
             } else if (error.response?.status === 404) {
                 errorMessage = "AI servisi şu anda kullanılamıyor.";
@@ -116,19 +128,23 @@ const createQuestion = async (
                 const mockMessage = generateMockQuestions(subject, type, piece);
                 const parsedData = parseQuestionsFromMessage(mockMessage);
                 
-                return res.render("ai_modules/quiztor/index", {
-                    questions: parsedData.questions,
-                    answers: parsedData.answers,
-                    subject: subject,
-                    type: type,
-                    piece: piece,
-                    hasQuestions: true
+                return res.json({
+                    message: "Sorular başarıyla oluşturuldu (mock - server error)",
+                    data: {
+                        message: mockMessage,
+                        questions: parsedData.questions,
+                        answers: parsedData.answers,
+                        subject: subject,
+                        type: type,
+                        piece: piece
+                    }
                 });
             }
         }
         
-        return res.status(500).render("error", {
-            message: errorMessage
+        return res.status(500).json({
+            message: errorMessage,
+            error: true
         });
     }
 }
