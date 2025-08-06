@@ -8,6 +8,7 @@ import { getWelcomePage } from "./controller/home/welcome";
 import { getLoginPage, postLoginPage } from "./controller/auth/login";
 import { getRegisterPage, postRegisterPage } from "./controller/auth/register";
 import { getDashboardPage } from "./controller/home/dashboard";
+import { getAIModulesPage } from "./controller/ai_modules";
 import { getNothorPage } from "./controller/ai_modules/nothor";
 import { getGenerateNothorPage, createNote } from "./controller/ai_modules/nothor/generate_nothor";
 import { getCompleteNothorPage, completeNote } from "./controller/ai_modules/nothor/complete_nothor";
@@ -21,6 +22,9 @@ export const endpoints: ControllerGroup = {
     },
     dashboard: {
         GET: { handler: getDashboardPage, auth: true }
+    },
+    "ai_modules": {
+        GET: { handler: getAIModulesPage, auth: false }
     },
     "ai_modules/nothor": {
         GET: { handler: getNothorPage, auth: false }
@@ -54,4 +58,4 @@ export const endpoints: ControllerGroup = {
 
 registerRoutes(router, endpoints);
 
-export default router;
+export default router;

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/ai_modules/style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body class="ai-modules-page">
+
+    <!-- Header Navigation -->
+    <div class="header-container">
+        <header class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="/img/logo.png" alt="Learnity Logo">
+                    <span class="logo-text">Learnity</span>
+                </a>
+            </div>
+            
+            <nav class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="separator">></span>
+                <span class="current">AI Modülleri</span>
+            </nav>
+
+            <div class="user-menu">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-robot"></i>
+                AI Modülleri
+            </h1>
+            <p class="page-description">
+                Yapay zeka destekli öğrenme araçlarımızı keşfedin. Her modül farklı öğrenme ihtiyaçlarınız için özel olarak tasarlanmıştır.
+            </p>
+        </div>
+
+        <div class="modules-grid">
+            <% modules.forEach(function(module) { %>
+            <div class="module-card" data-module="<%= module.id %>">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="<%= module.icon %>"></i>
+                    </div>
+                    <h3 class="module-title"><%= module.name %></h3>
+                </div>
+                
+                <div class="module-content">
+                    <p class="module-description"><%= module.description %></p>
+                    
+                    <div class="module-features">
+                        <h4>Özellikler:</h4>
+                        <ul>
+                            <% module.features.forEach(function(feature) { %>
+                            <li><i class="fas fa-check"></i> <%= feature %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="module-footer">
+                    <button class="module-btn" onclick="window.location.href='<%= module.url %>'">
+                        <i class="fas fa-arrow-right"></i>
+                        Başla
+                    </button>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+
+        <!-- İstatistikler Bölümü -->
+        <div class="stats-section">
+            <h2 class="stats-title">
+                <i class="fas fa-chart-bar"></i>
+                Kullanım İstatistikleri
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Toplam Kullanıcı</h3>
+                        <p class="stat-number">1,234</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Tamamlanan Görevler</h3>
+                        <p class="stat-number">5,678</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Toplam Öğrenme Süresi</h3>
+                        <p class="stat-number">12,345 saat</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Başarı Oranı</h3>
+                        <p class="stat-number">87%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modül kartlarına hover efekti
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Modül kartlarına tıklama eventi
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const module = this.dataset.module;
+                const url = this.querySelector('.module-btn').onclick.toString().match(/'([^']+)'/)[1];
+                window.location.href = url;
+            });
+        });
+    </script>
+</body>
+</html>

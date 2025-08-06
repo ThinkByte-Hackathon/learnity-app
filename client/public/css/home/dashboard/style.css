@@ -528,3 +528,57 @@
         margin-bottom: 20px;
     }
 }
+/* AI Modülleri Kartı Stilleri */
+.ai-modules-section {
+    margin-bottom: 2rem;
+}
+.ai-modules-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+    color: white;
+}
+.ai-modules-icon {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.ai-modules-content {
+    flex-grow: 1;
+}
+.ai-modules-content h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.ai-modules-content p {
+    margin: 0;
+    opacity: 0.9;
+}
+.ai-modules-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #667eea;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+.ai-modules-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
