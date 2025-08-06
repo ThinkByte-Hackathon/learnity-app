@@ -5,9 +5,9 @@
 /* CSS Variables - Tutarlılık için merkezi değişkenler */
 :root {
     /* Colors */
-    --primary-color: #4494c9;
-    --secondary-color: #4494c9;
-    --accent-color: #5a9a74;
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #667eea;
     --text-primary: #333;
     --text-light: #555;
     --text-muted: #999;
@@ -18,7 +18,7 @@
     --bg-overlay: rgba(0, 0, 50, 0.8);
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, #539fd5 0%, #5a9a74 100%); /* #b9d2ad eski yeşilin renk kodu*/
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-form-bg: var(--gradient-hero);
     
     /* Spacing */
@@ -647,4 +647,127 @@ input:focus,
 a:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+}
+
+/* ==========================================
+   UYUMLU CSS - NOTHOR SAYFALARINDAN UYARLANDI
+   ========================================== */
+
+/* CSS Variables - Nothor sayfalarıyla uyumlu */
+:root {
+    /* Colors - Nothor sayfalarından */
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #667eea;
+    --text-primary: #333;
+    --text-light: #555;
+    --text-muted: #999;
+    --text-white: #fff;
+    --bg-primary: #e4e3e3;
+    --bg-white: #fff;
+    --bg-input: #eaeaea;
+    --bg-overlay: rgba(0, 0, 50, 0.8);
+    
+    /* Gradients - Nothor sayfalarıyla aynı */
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-form-bg: var(--gradient-hero);
+    
+    /* Spacing */
+    --space-xs: 8px;
+    --space-sm: 15px;
+    --space-md: 30px;
+    --space-lg: 60px;
+    --space-xl: 80px;
+    
+    /* Border Radius */
+    --radius-sm: 3px;
+    --radius-md: 10px;
+    --radius-lg: 20px;
+    --radius-xl: 25px;
+    --radius-full: 50%;
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-normal: 1s ease;
+    
+    /* Shadows */
+    --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-text: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   BASE STYLES - Temel reset ve tipografi
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--gradient-hero);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   REGISTER PAGE STYLES - Nothor sayfalarıyla uyumlu
+   ========================================== */
+
+body.home-page {
+    background: var(--gradient-hero);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Header Container - Nothor sayfalarıyla aynı stil */
+.header-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--text-primary);
+}
+
+/* Logo Styles - Nothor sayfalarıyla aynı */
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.navbar .logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+}
+
+.navbar .logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar .logo .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
 }
