@@ -25,6 +25,7 @@ app.set("views", path.join(process.cwd(), "client", "views"));
 
 // Static Routes:
 app.use("/styles", express.static(path.join(process.cwd(), "client", "public", "css")));
+app.use("/img", express.static(path.join(process.cwd(), "client", "public", "img")));
 
 import router from "./client";
 app.use(router);

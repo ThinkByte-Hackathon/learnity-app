@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiztor - AI Soru Üretici - Learnity</title>
+    <title>Gemini Soru Oluşturucu - Learnity</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/ai_modules/quiztor/style.css">
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
@@ -26,247 +26,248 @@
                 <span class="separator">></span>
                 <a href="/ai_modules">AI Modülleri</a>
                 <span class="separator">></span>
-                <span class="current">Quiztor - AI Soru Üretici</span>
+                <span class="current">Gemini Soru Oluşturucu</span>
             </nav>
         </header>
     </div>
 
     <!-- Main Container -->
     <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Gemini Soru Oluşturucu</h1>
+            <p>Öğrenmek istediğiniz konuyu belirtin, AI sizin için seviyeli sorular oluştursun ve test çözün.</p>
+        </div>
+
         <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Sol Taraf - Ana İçerik -->
-            <div class="main-content">
-                <!-- Input Section - Soru Üretme -->
-                <div class="input-section" id="input-section">
-                    <!-- Konu Belirleme Kartı -->
-                    <div class="topic-card">
-                        <h2 class="topic-title">Konu Belirleyin</h2>
-                        <p class="topic-subtitle">Hangi konu hakkında soru oluşturmak istiyorsunuz?</p>
-                        
-                        <div class="topic-input-container">
-                            <textarea 
-                                id="subject-input" 
-                                class="topic-textarea"
-                                placeholder="Örnek: Python programlama dili temel kavramları, Osmanlı İmparatorluğu'nun kuruluş dönemi, Matematik türev konusu..."
-                                rows="4"
-                            ></textarea>
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-card">
+                    <h3 class="input-title">
+                        <i class="fas fa-brain"></i>
+                        Soru Oluştur
+                    </h3>
+                    
+                    <div class="topic-input-group">
+                        <label for="topic-input">Hangi konu hakkında soru oluşturmak istiyorsunuz?</label>
+                        <textarea 
+                            id="topic-input" 
+                            placeholder="Örnek: Python programlama dili temel kavramları, Osmanlı İmparatorluğu'nun kuruluş dönemi, Matematik türev konusu..."
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="options-group">
+                        <h4>Zorluk Seviyesi</h4>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty-level" value="easy" checked>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Isınma (Kolay)</strong>
+                                    <span>Temel kavramlar ve basit sorular</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty-level" value="normal">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Antrenman (Orta)</strong>
+                                    <span>Orta seviye sorular ve uygulamalar</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty-level" value="hard">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Lig (Zor)</strong>
+                                    <span>Zorlu sorular ve detaylı analiz</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty-level" value="extreme">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Şampiyonlar Ligi (Aşırı Zor)</strong>
+                                    <span>En zorlu sorular ve uzman seviyesi</span>
+                                </div>
+                            </label>
                         </div>
                     </div>
 
-                    <!-- Ayarlar Kartı -->
-                    <div class="settings-card">
-                        <div class="settings-row">
-                            <div class="setting-group">
-                                <h4>Zorluk Seviyesi</h4>
-                                <div class="radio-group">
-                                    <label class="radio-option">
-                                        <input type="radio" name="difficulty-level" value="easy" checked>
-                                        <span class="radio-custom"></span>
-                                        <div class="radio-content">
-                                            <strong>Kolay</strong>
-                                            <span>Temel seviye sorular</span>
-                                        </div>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="difficulty-level" value="normal">
-                                        <span class="radio-custom"></span>
-                                        <div class="radio-content">
-                                            <strong>Orta</strong>
-                                            <span>Orta seviye sorular</span>
-                                        </div>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="difficulty-level" value="hard">
-                                        <span class="radio-custom"></span>
-                                        <div class="radio-content">
-                                            <strong>Zor</strong>
-                                            <span>İleri seviye sorular</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="setting-group">
-                                <h4>Soru Sayısı</h4>
-                                <div class="select-group">
-                                    <select id="question-count" class="custom-select">
-                                        <option value="1">1 Soru</option>
-                                        <option value="2">2 Soru</option>
-                                        <option value="3" selected>3 Soru</option>
-                                        <option value="4">4 Soru</option>
-                                        <option value="5">5 Soru</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="generate-btn-container">
-                            <button id="generate-questions-btn" class="generate-btn">
-                                <i class="fas fa-magic"></i>
-                                Sorular Oluştur
-                            </button>
+                    <div class="options-group">
+                        <h4>Soru Sayısı</h4>
+                        <div class="question-count-group">
+                            <label class="count-option">
+                                <input type="radio" name="question-count" value="1">
+                                <span class="count-custom">1</span>
+                            </label>
+                            <label class="count-option">
+                                <input type="radio" name="question-count" value="2">
+                                <span class="count-custom">2</span>
+                            </label>
+                            <label class="count-option">
+                                <input type="radio" name="question-count" value="3" checked>
+                                <span class="count-custom">3</span>
+                            </label>
+                            <label class="count-option">
+                                <input type="radio" name="question-count" value="4">
+                                <span class="count-custom">4</span>
+                            </label>
+                            <label class="count-option">
+                                <input type="radio" name="question-count" value="5">
+                                <span class="count-custom">5</span>
+                            </label>
                         </div>
                     </div>
+
+                    <button class="generate-btn" id="generate-questions-btn">
+                        <i class="fas fa-brain"></i>
+                        <span class="btn-text">Soru Oluştur</span>
+                        <div class="loading-spinner" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Quiz Section - Test Çözme Ekranı -->
-                <div class="quiz-section" id="quiz-section" style="display: none;">
-                    <div class="quiz-header">
-                        <h2>Test Çözme</h2>
-                        <div class="suggested-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Önerilen Süre: <span id="suggested-time">5 dk</span></span>
-                        </div>
-                    </div>
-                    
-                    <div class="questions-container" id="questions-container">
-                        <!-- Sorular buraya dinamik olarak eklenecek -->
-                    </div>
-                    
-                    <div class="quiz-actions">
-                        <button id="finish-quiz-btn" class="finish-quiz-btn">
-                            <i class="fas fa-check"></i>
-                            Testi Bitir
+            <!-- Ders Kategorilendirme (generate_nothor'dan alınan yapı) -->
+            <div id="subject-categories-section" class="subject-categories-section">
+                <div class="subject-categories-header">
+                    <h3><i class="fas fa-layer-group"></i> Ders Kategorileri</h3>
+                    <p>Oluşturulan sorular ders türüne göre gruplandırılır</p>
+                </div>
+                <div class="subject-categories-grid" id="subject-categories-grid">
+                    <!-- JS ile doldurulacak -->
+                </div>
+            </div>
+
+            <!-- İstatistik kutusunu ipuçlarının hemen üstüne taşı -->
+            <div id="usage-stats-section" class="usage-stats-section">
+                <h3>Kullanım İstatistikleri</h3>
+                <div class="stats-grid">
+                    <div class="stat-card stat-created"><span id="stat-created">0</span><span>Oluşturulan Soru</span></div>
+                    <div class="stat-card stat-correct"><span id="stat-correct">0</span><span>Doğru Cevap</span></div>
+                    <div class="stat-card stat-wrong"><span id="stat-wrong">0</span><span>Yanlış Cevap</span></div>
+                    <div class="stat-card stat-skipped"><span id="stat-skipped">0</span><span>Boş Bırakılan</span></div>
+                </div>
+                <button id="reset-stats-btn">İstatistikleri Sıfırla</button>
+            </div>
+
+
+
+            <!-- Soru Gösterimi ve Test Akışı -->
+            <div id="questions-section" class="questions-section" <% if (typeof hasQuestions !== 'undefined' && hasQuestions) { %>style="display:block;"<% } else { %>style="display:none;"<% } %>>
+                <div class="questions-header">
+                    <h3><i class="fas fa-question-circle"></i> Oluşturulan Sorular</h3>
+                    <div class="questions-actions">
+                        <button class="action-btn save-test-btn" id="save-test-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Testi Kaydet
+                        </button>
+                        <button class="action-btn share-btn" id="share-btn">
+                            <i class="fas fa-share"></i>
+                            Paylaş
                         </button>
                     </div>
                 </div>
+                <form id="questions-form">
+                    <div id="questions-list">
+                        <% if (typeof questions !== 'undefined' && questions && questions.length > 0) { %>
+                            <% questions.forEach(function(question, index) { %>
+                                <div class="question-item" data-question-id="<%= question.id %>">
+                                    <div class="question-header">
+                                        <span class="question-number">Soru <%= question.id %></span>
+                                    </div>
+                                    <div class="question-text">
+                                        <%= question.text %>
+                                    </div>
+                                    <div class="options-container">
+                                        <% question.options.forEach(function(option, optIndex) { %>
+                                            <label class="option-label">
+                                                <input type="radio" name="question_<%= question.id %>" value="<%= option.charAt(0) %>">
+                                                <span class="option-text"><%= option %></span>
+                                            </label>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <!-- Sorular JS ile eklenecek -->
+                        <% } %>
+                    </div>
+                    <button type="button" id="finish-test-btn">Testi Bitir</button>
+                </form>
+                <div id="test-results" style="display:none;"></div>
+            </div>
 
-                <!-- Results Section - Sonuçlar -->
-                <div class="results-section" id="results-section" style="display: none;">
-                    <div class="results-header">
-                        <h2>Test Sonuçları</h2>
+            <!-- Results Modal -->
+            <div class="modal-overlay" id="results-modal" style="display: none;">
+                <div class="modal-content results-modal">
+                    <div class="modal-header">
+                        <h3>
+                            <i class="fas fa-trophy"></i>
+                            Test Sonuçları
+                        </h3>
+                        <button class="modal-close-btn" onclick="closeResultsModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                     
-                    <div class="score-summary">
-                        <div class="score-item correct">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Doğru: <span id="correct-count">0</span></span>
+                    <div class="modal-body">
+                        <div class="results-summary">
+                            <div class="result-item correct">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Doğru: <strong id="result-correct">0</strong></span>
+                            </div>
+                            <div class="result-item wrong">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Yanlış: <strong id="result-wrong">0</strong></span>
+                            </div>
+                            <div class="result-item skipped">
+                                <i class="fas fa-forward"></i>
+                                <span>Boş: <strong id="result-skipped">0</strong></span>
+                            </div>
+                            <div class="result-item score">
+                                <i class="fas fa-star"></i>
+                                <span>Puan: <strong id="result-score">0</strong></span>
+                            </div>
                         </div>
-                        <div class="score-item wrong">
-                            <i class="fas fa-times-circle"></i>
-                            <span>Yanlış: <span id="wrong-count">0</span></span>
-                        </div>
-                        <div class="score-item empty">
-                            <i class="fas fa-minus-circle"></i>
-                            <span>Boş: <span id="empty-count">0</span></span>
+                        
+                        <div class="results-details" id="results-details">
+                            <!-- Detaylı sonuçlar buraya gelecek -->
                         </div>
                     </div>
                     
-                    <div class="detailed-results" id="detailed-results">
-                        <!-- Detaylı sonuçlar buraya gelecek -->
-                    </div>
-                    
-                    <div class="results-actions">
-                        <button id="new-quiz-btn" class="new-quiz-btn">
-                            <i class="fas fa-plus"></i>
-                            Yeni Test
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="closeResultsModal()">
+                            <i class="fas fa-times"></i>
+                            Kapat
+                        </button>
+                        <button class="btn btn-primary" onclick="saveTestResults()">
+                            <i class="fas fa-save"></i>
+                            Sonuçları Kaydet
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Sağ Taraf - Yan Panel -->
-            <div class="sidebar">
-                <!-- Ders Kategorileri -->
-                <div class="categories-section">
-                    <div class="categories-header">
-                        <h3 class="categories-title">Ders Kategorileri</h3>
-                        <p class="categories-subtitle">Sorularınız ders türüne göre gruplandırılmıştır</p>
+            <!-- Tips Section -->
+            <div class="tips-section">
+                <h3><i class="fas fa-lightbulb"></i> İpuçları</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>Spesifik Olun</h4>
+                        <p>Konuyu mümkün olduğunca spesifik belirtin. "Matematik" yerine "Türev alma kuralları" deyin.</p>
                     </div>
-                    
-                    <div class="categories-grid">
-                        <div class="category-item matematik">
-                            <div class="category-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <div class="category-info">
-                                <h4>Matematik</h4>
-                                <span class="category-count">7 soru</span>
-                            </div>
-                        </div>
-                        
-                        <div class="category-item geometri">
-                            <div class="category-icon">
-                                <i class="fas fa-shapes"></i>
-                            </div>
-                            <div class="category-info">
-                                <h4>Geometri</h4>
-                                <span class="category-count">3 soru</span>
-                            </div>
-                        </div>
-                        
-                        <div class="category-item fizik">
-                            <div class="category-icon">
-                                <i class="fas fa-atom"></i>
-                            </div>
-                            <div class="category-info">
-                                <h4>Fizik</h4>
-                                <span class="category-count">5 soru</span>
-                            </div>
-                        </div>
-                        
-                        <div class="category-item kimya">
-                            <div class="category-icon">
-                                <i class="fas fa-flask"></i>
-                            </div>
-                            <div class="category-info">
-                                <h4>Kimya</h4>
-                                <span class="category-count">2 soru</span>
-                            </div>
-                        </div>
+                    <div class="tip-card">
+                        <h4>Seviye Seçin</h4>
+                        <p>Kendi seviyenize uygun zorluk derecesi seçin. Başlangıç için "Isınma" seviyesini öneriyoruz.</p>
                     </div>
-                </div>
-
-                <!-- İstatistikler -->
-                <div class="stats-section">
-                    <div class="stats-header">
-                        <h3 class="stats-title">
-                            <i class="fas fa-chart-bar"></i>
-                            Kullanım İstatistikleri
-                        </h3>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-icon total">
-                                <i class="fas fa-question-circle"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" id="total-questions">0</span>
-                                <span class="stat-label">Oluşturulan Soru</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-icon correct">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" id="correct-answers">0</span>
-                                <span class="stat-label">Doğru Cevap</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-icon wrong">
-                                <i class="fas fa-times-circle"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" id="wrong-answers">0</span>
-                                <span class="stat-label">Yanlış Cevap</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-icon empty">
-                                <i class="fas fa-minus-circle"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" id="empty-answers">0</span>
-                                <span class="stat-label">Boş Bırakılan</span>
-                            </div>
-                        </div>
+                    <div class="tip-card">
+                        <h4>Düzenli Çalışın</h4>
+                        <p>Her gün birkaç soru çözerek bilgilerinizi pekiştirin ve ilerlemenizi takip edin.</p>
                     </div>
                 </div>
             </div>
@@ -274,213 +275,508 @@
     </div>
 
     <script>
-        // Global variables
-        let currentQuestions = [];
-        let userAnswers = {};
-        let quizStats = JSON.parse(localStorage.getItem('quiztor_stats') || '{"totalQuestions": 0, "correctAnswers": 0, "wrongAnswers": 0, "emptyAnswers": 0}');
-
-        // Initialize page
+        // === Ders Kategorilendirme ===
+        const subjectKeywords = {
+            matematik: ['matematik','türev','integral','fonksiyon','limit','matris','denklem','geometri','trigonometri','logaritma','karekök','çarpanlar','asal','polinom','kümeler','oran','oran orantı','permutasyon','kombinasyon','olasılık','analitik'],
+            geometri: ['geometri','üçgen','dikdörtgen','çember','açı','kenar','alan','çevre','prizma','doğru','nokta','paralel','dörtgen','yamuk','kare','dik','teğet','kiriş','köşe','çokgen'],
+            fizik: ['fizik','kuvvet','enerji','iş','hareket','ivme','hız','sürat','elektrik','akım','direnç','manyetizma','optik','dalgalar','basınç','ısı','sıcaklık','momentum','kütle','ağırlık','yerçekimi'],
+            kimya: ['kimya','element','bileşik','atom','periyodik','tepkime','mol','asit','baz','tuz','iyon','çözelt','tepkime','reaksiyon','bağ','elektron','proton','nötron','organik','anorganik'],
+            biyoloji: ['biyoloji','hücre','dna','rna','protein','enzim','mitoz','mayoz','evrim','ekoloji','canlı','organizma','sindirim','solunum','üreme','genetik','bitki','hayvan','doku','organ','sistem'],
+            turkce: ['türkçe','fiil','isim','sıfat','zamir','zarf','cümle','paragraf','anlam','yazım','noktalama','ek','kök','hece','ses','sözcük','dilbilgisi','edat','bağlaç','ünlem'],
+            edebiyat: ['edebiyat','şiir','roman','hikaye','deneme','tiyatro','masal','destan','tür','yazar','şair','tema','olay','kahraman','anlatıcı','edebi','akım','sanat','eleştiri'],
+            tarih: ['tarih','osmanlı','cumhuriyet','savaş','devrim','inkılap','padişah','imparatorluk','çağ','medeniyet','antlaşma','devlet','isyan','fetih','bağımsızlık','lider','krallık','imparator','koloni'],
+            cografya: ['coğrafya','kıta','ülke','şehir','nüfus','iklim','harita','dağ','ova','akarsu','göl','deniz','okyanus','yer şekilleri','doğa','bölge','ekonomi','tarım','sanayi','ulaşım'],
+            ingilizce: ['ingilizce','english','grammar','vocabulary','kelime','dil','tense','present','past','future','modal','if clause','passive','active','sentence','paragraph','translate','çeviri'],
+            din: ['din','din kültürü','din kültürü ve ahlak bilgisi','islam', 'kuran', 'hadis', 'peygamber', 'allah', 'namaz', 'oruç', 'hac', 'zekat', 'ahlak', 'ibadet', 'dua'],
+            felsefe: ['felsefe','felsefe ve etik','felsefe ve ahlak','düşünce', 'mantık', 'etik', 'ahlak', 'varlık', 'bilgi', 'hakikat', 'özgürlük', 'adalet', 'güzellik', 'platon', 'aristoteles'],
+            diger: []
+        };
+        function detectSubject(content) {
+            const text = content.toLowerCase();
+            let maxScore = 0;
+            let detectedSubject = 'diger';
+            for (const [subject, keywords] of Object.entries(subjectKeywords)) {
+                let score = 0;
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(keyword, 'gi');
+                    const matches = text.match(regex);
+                    if (matches) score += matches.length;
+                });
+                if (score > maxScore) {
+                    maxScore = score;
+                    detectedSubject = subject;
+                }
+            }
+            return detectedSubject;
+        }
+        function getSubjectInfo(subject) {
+            const subjectMap = {
+                matematik: { name: 'Matematik', icon: '📐', color: '#ff6b6b' },
+                geometri: { name: 'Geometri', icon: '📏', color: '#4ecdc4' },
+                fizik: { name: 'Fizik', icon: '⚡', color: '#45b7d1' },
+                kimya: { name: 'Kimya', icon: '🧪', color: '#f9ca24' },
+                biyoloji: { name: 'Biyoloji', icon: '🧬', color: '#6c5ce7' },
+                turkce: { name: 'Türkçe', icon: '📝', color: '#a29bfe' },
+                edebiyat: { name: 'Türk Dili ve Edebiyatı', icon: '📚', color: '#fd79a8' },
+                tarih: { name: 'Tarih', icon: '🏛️', color: '#e17055' },
+                cografya: { name: 'Coğrafya', icon: '🌍', color: '#00b894' },
+                ingilizce: { name: 'İngilizce', icon: '🇬🇧', color: '#0984e3' },
+                din: { name: 'Din Kültürü ve Ahlak Bilgisi', icon: '✝️', color: '#8e44ad' },
+                felsefe: { name: 'Felsefe', icon: '💡', color: '#2ecc71' },
+                diger: { name: 'Diğer', icon: '📋', color: '#636e72' }
+            };
+            return subjectMap[subject] || subjectMap.diger;
+        }
+        function displaySubjectCategories(subjectCounts = {}) {
+            const grid = document.getElementById('subject-categories-grid');
+            const subjects = [
+                'matematik', 'geometri', 'fizik', 'kimya', 'biyoloji',
+                'turkce', 'edebiyat', 'tarih', 'cografya', 'ingilizce', 'din', 'felsefe', 'diger'
+            ];
+            grid.innerHTML = subjects.map(subject => {
+                const info = getSubjectInfo(subject);
+                const count = subjectCounts[subject] || 0;
+                return `<div class="subject-category-card${count === 0 ? ' empty' : ''}" style="border-top: 4px solid ${info.color}" title="${info.name}">
+                    <div class="subject-card-icon">${info.icon}</div>
+                    <div class="subject-card-name">${info.name}</div>
+                    <div class="subject-card-count">${count} test</div>
+                </div>`;
+            }).join('');
+        }
+        function updateSubjectCategoriesFromTests() {
+            const savedTests = JSON.parse(localStorage.getItem('learnity_quiztor_tests') || '[]');
+            const subjectCounts = {};
+            savedTests.forEach(test => {
+                const subject = detectSubject(test.subject || test.content || '');
+                subjectCounts[subject] = (subjectCounts[subject] || 0) + 1;
+            });
+            displaySubjectCategories(subjectCounts);
+        }
         document.addEventListener('DOMContentLoaded', function() {
-            updateStatsDisplay();
-            
-            // Event listeners
-            document.getElementById('generate-questions-btn').addEventListener('click', generateQuestions);
-            document.getElementById('finish-quiz-btn').addEventListener('click', finishQuiz);
-            document.getElementById('new-quiz-btn').addEventListener('click', startNewQuiz);
+            updateSubjectCategoriesFromTests();
         });
+        // === Soru Gösterimi ve Test Akışı ===
+        let currentQuestions = [];
+        let userAnswers = [];
+        let answerKey = [];
+        function displayQuestions(questions, answers) {
+            const list = document.getElementById('questions-list');
+            list.innerHTML = '';
+            userAnswers = Array(questions.length).fill(null);
+            answerKey = answers;
+            questions.forEach((q, i) => {
+                const options = q.options.map((opt, idx) =>
+                    `<label class="option-label">
+                        <input type="radio" name="q${i}" value="${String.fromCharCode(97+idx)}">
+                        <span>${String.fromCharCode(97+idx)})</span> ${opt}
+                    </label>`
+                ).join('');
+                list.innerHTML += `<div class="question-card">
+                    <div class="question-title">${q.text}</div>
+                    <div class="options-list">${options}</div>
+                    <button type="button" class="skip-btn" data-index="${i}">Boş Bırak</button>
+                </div>`;
+            });
+            document.getElementById('questions-section').style.display = 'block';
+            // Skip button event
+            document.querySelectorAll('.skip-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    userAnswers[idx] = null;
+                    // Uncheck all radios for this question
+                    document.querySelectorAll(`input[name="q${idx}"]`).forEach(r => r.checked = false);
+                };
+            });
+            // Radio change event
+            document.querySelectorAll('.options-list input[type="radio"]').forEach(radio => {
+                radio.onchange = function() {
+                    const idx = parseInt(radio.name.substring(1));
+                    userAnswers[idx] = radio.value;
+                };
+            });
+        }
+        document.getElementById('finish-test-btn').onclick = function() {
+            let correct = 0, wrong = 0, skipped = 0;
+            let resultsHtml = '<h4>Test Sonucu</h4><ul>';
+            userAnswers.forEach((ans, i) => {
+                if(ans === null) { skipped++; resultsHtml += `<li>Soru ${i+1}: <span style='color:#f9ca24'>Boş Bırakıldı</span> (Doğru: ${answerKey[i]})</li>`; }
+                else if(ans === answerKey[i]) { correct++; resultsHtml += `<li>Soru ${i+1}: <span style='color:#2ecc71'>Doğru</span></li>`; }
+                else { wrong++; resultsHtml += `<li>Soru ${i+1}: <span style='color:#e17055'>Yanlış</span> (Senin: ${ans}, Doğru: ${answerKey[i]})</li>`; }
+            });
+            resultsHtml += '</ul>';
+            document.getElementById('test-results').innerHTML = resultsHtml;
+            document.getElementById('test-results').style.display = 'block';
+            // İstatistik güncelle
+            updateStatistics(userAnswers.length, correct, wrong, skipped);
+        };
+        // === Kullanım İstatistikleri ===
+        function updateStatistics(total=0, correct=0, wrong=0, skipped=0) {
+            let stats = JSON.parse(localStorage.getItem('learnity_quiztor_stats') || '{"created":0,"correct":0,"wrong":0,"skipped":0}');
+            stats.created += total;
+            stats.correct += correct;
+            stats.wrong += wrong;
+            stats.skipped += skipped;
+            document.getElementById('stat-created').innerText = stats.created;
+            document.getElementById('stat-correct').innerText = stats.correct;
+            document.getElementById('stat-wrong').innerText = stats.wrong;
+            document.getElementById('stat-skipped').innerText = stats.skipped;
+            localStorage.setItem('learnity_quiztor_stats', JSON.stringify(stats));
+        }
+        document.getElementById('reset-stats-btn').onclick = function() {
+            localStorage.setItem('learnity_quiztor_stats', '{"created":0,"correct":0,"wrong":0,"skipped":0}');
+            updateStatistics(0,0,0,0);
+        };
+        // Soru oluşturulduğunda çağrılacak örnek fonksiyon (API'den dönen veriyle uyumlu olmalı)
+        function onQuestionsGenerated(apiData) {
+            // apiData: { questions: [{text, options:[]}, ...], answers: ['a','b',...], subject: 'matematik' }
+            displayQuestions(apiData.questions, apiData.answers);
+            updateSubjectCategoriesFromTests();
+        }
 
-        // Generate questions
-        async function generateQuestions() {
-            const subject = document.getElementById('subject-input').value.trim();
-            const type = document.querySelector('input[name="difficulty-level"]:checked').value;
-            const piece = parseInt(document.getElementById('question-count').value);
+        // Test Management
+        let currentTest = null;
+        let testAnswers = {};
 
-            if (!subject) {
+        function skipQuestion(questionId) {
+            // Clear all radio buttons for this question
+            const questionElement = document.querySelector(`[data-question-id="${questionId}"]`);
+            const radioButtons = questionElement.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.checked = false);
+            
+            // Mark as skipped
+            testAnswers[questionId] = 'skipped';
+            
+            // Visual feedback
+            questionElement.classList.add('skipped');
+            setTimeout(() => {
+                questionElement.classList.remove('skipped');
+            }, 1000);
+        }
+
+        function finishTest() {
+            // Collect all answers
+            const questions = document.querySelectorAll('.question-item');
+            let correctCount = 0;
+            let wrongCount = 0;
+            let skippedCount = 0;
+            
+            questions.forEach((question, index) => {
+                const questionId = index + 1;
+                const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                
+                if (selectedAnswer) {
+                    testAnswers[questionId] = selectedAnswer.value;
+                    // For mock purposes, assume A is always correct
+                    if (selectedAnswer.value === 'A') {
+                        correctCount++;
+                    } else {
+                        wrongCount++;
+                    }
+                } else {
+                    testAnswers[questionId] = 'skipped';
+                    skippedCount++;
+                }
+            });
+
+            // Update statistics
+            statistics.totalQuestions += questions.length;
+            statistics.correctAnswers += correctCount;
+            statistics.wrongAnswers += wrongCount;
+            statistics.skippedQuestions += skippedCount;
+            
+            localStorage.setItem('learnity_quiztor_stats', JSON.stringify(statistics));
+            updateStatistics();
+
+            // Show results
+            showTestResults(correctCount, wrongCount, skippedCount, questions.length);
+        }
+
+        function showTestResults(correct, wrong, skipped, total) {
+            const score = Math.round((correct / total) * 100);
+            
+            document.getElementById('result-correct').textContent = correct;
+            document.getElementById('result-wrong').textContent = wrong;
+            document.getElementById('result-skipped').textContent = skipped;
+            document.getElementById('result-score').textContent = score;
+
+            // Generate detailed results
+            const resultsDetails = document.getElementById('results-details');
+            let detailsHTML = '<h4>Soru Detayları:</h4>';
+            
+            Object.keys(testAnswers).forEach(questionId => {
+                const answer = testAnswers[questionId];
+                const isCorrect = answer === 'A'; // Mock: A is always correct
+                const status = answer === 'skipped' ? 'skipped' : (isCorrect ? 'correct' : 'wrong');
+                const statusText = answer === 'skipped' ? 'Boş Bırakıldı' : (isCorrect ? 'Doğru' : 'Yanlış');
+                
+                detailsHTML += `
+                    <div class="result-detail-item ${status}">
+                        <span class="detail-question">Soru ${questionId}</span>
+                        <span class="detail-answer">Cevap: ${answer === 'skipped' ? '-' : answer}</span>
+                        <span class="detail-status">${statusText}</span>
+                    </div>
+                `;
+            });
+            
+            resultsDetails.innerHTML = detailsHTML;
+            document.getElementById('results-modal').style.display = 'block';
+        }
+
+        function closeResultsModal() {
+            document.getElementById('results-modal').style.display = 'none';
+        }
+
+        function saveTestResults() {
+            // Save test results to localStorage
+            const savedTests = JSON.parse(localStorage.getItem('learnity_quiztor_tests') || '[]');
+            const testResult = {
+                id: Date.now().toString(),
+                subject: currentTest?.subject || 'Bilinmeyen Konu',
+                difficulty: currentTest?.type || 'normal',
+                questions: currentTest?.piece || 0,
+                answers: testAnswers,
+                correct: parseInt(document.getElementById('result-correct').textContent),
+                wrong: parseInt(document.getElementById('result-wrong').textContent),
+                skipped: parseInt(document.getElementById('result-skipped').textContent),
+                score: parseInt(document.getElementById('result-score').textContent),
+                createdAt: new Date().toISOString()
+            };
+            
+            savedTests.unshift(testResult);
+            localStorage.setItem('learnity_quiztor_tests', JSON.stringify(savedTests));
+            
+            alert('Test sonuçları kaydedildi!');
+            closeResultsModal();
+        }
+
+        // Generate Questions Button Event Listener
+        document.getElementById('generate-questions-btn').addEventListener('click', async function() {
+            const topicInput = document.getElementById('topic-input');
+            const difficultyLevel = document.querySelector('input[name="difficulty-level"]:checked');
+            const questionCount = document.querySelector('input[name="question-count"]:checked');
+            
+            if (!topicInput.value.trim()) {
                 alert('Lütfen bir konu girin.');
                 return;
             }
-
-            const generateBtn = document.getElementById('generate-questions-btn');
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sorular Oluşturuluyor...';
-
+            
+            if (!difficultyLevel) {
+                alert('Lütfen zorluk seviyesi seçin.');
+                return;
+            }
+            
+            if (!questionCount) {
+                alert('Lütfen soru sayısı seçin.');
+                return;
+            }
+            
+            // Show loading state
+            const btn = this;
+            const btnText = btn.querySelector('.btn-text');
+            const spinner = btn.querySelector('.loading-spinner');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            
             try {
-                const response = await axios.post('/gemini/createQuestion', {
-                    subject: subject,
-                    type: type,
-                    piece: piece
+                // Real API call to backend
+                const response = await axios.post('/ai_modules/quiztor', {
+                    subject: topicInput.value.trim(),
+                    type: difficultyLevel.value,
+                    piece: parseInt(questionCount.value)
                 });
-
-                if (response.data.success) {
-                    currentQuestions = response.data.questions;
-                    userAnswers = {};
+                
+                if (response.data.message) {
+                    currentTest = {
+                        subject: topicInput.value.trim(),
+                        type: difficultyLevel.value,
+                        piece: parseInt(questionCount.value)
+                    };
+                    testAnswers = {};
                     
-                    // Update suggested time if provided
-                    if (response.data.suggestedTime) {
-                        document.getElementById('suggested-time').textContent = response.data.suggestedTime;
-                    }
+                    displayGeneratedQuestions(response.data.data);
                     
-                    displayQuiz();
+                    // Clear form
+                    topicInput.value = '';
+                    document.querySelector('input[name="difficulty-level"]:checked').checked = false;
+                    document.querySelector('input[name="question-count"]:checked').checked = false;
                 } else {
-                    alert('Soru oluşturulurken hata oluştu: ' + (response.data.error || 'Bilinmeyen hata'));
+                    throw new Error(response.data.message || 'Soru oluşturulamadı.');
+                }
+                
+            } catch (error) {
+                console.error('Question generation error:', error);
+                let errorMessage = 'Soru oluşturulurken bir hata oluştu.';
+                
+                if (error.response) {
+                    errorMessage = error.response.data.message || errorMessage;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                alert(errorMessage);
+            } finally {
+                // Reset button state
+                btn.disabled = false;
+                btnText.style.display = 'inline-block';
+                spinner.style.display = 'none';
+            }
+        });
+
+        // Display Generated Questions Function - Modern Test Format
+        function displayGeneratedQuestions(data) {
+            try {
+                // API'den gelen message string'ini parse et
+                const message = data.message || '';
+                
+                if (!message) {
+                    alert('API\'den veri gelmedi. Lütfen tekrar deneyin.');
+                    return;
+                }
+
+                // Soruları ve cevap anahtarını parse et
+                const parsedData = parseQuestionsFromMessage(message);
+                
+                if (parsedData.questions.length > 0) {
+                    displayQuestions(parsedData.questions, parsedData.answers);
+                    document.getElementById('questions-section').style.display = 'block';
+                    document.getElementById('questions-section').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                } else {
+                    alert('Sorular parse edilemedi. Lütfen tekrar deneyin.');
                 }
             } catch (error) {
-                console.error('API Error:', error);
-                alert('Soru oluşturulurken hata oluştu. Lütfen tekrar deneyin.');
-            } finally {
-                generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fas fa-magic"></i> Sorular Oluştur';
+                console.error('Soruları gösterme hatası:', error);
+                alert('Sorular gösterilirken hata oluştu. Lütfen tekrar deneyin.');
             }
         }
 
-        // Display quiz
-        function displayQuiz() {
-            document.getElementById('input-section').style.display = 'none';
-            document.getElementById('quiz-section').style.display = 'block';
-            document.getElementById('results-section').style.display = 'none';
-
-            const container = document.getElementById('questions-container');
-            container.innerHTML = '';
-
-            currentQuestions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question-item';
-                questionDiv.innerHTML = `
-                    <div class="question-header">
-                        <span class="question-number">Soru ${index + 1}</span>
-                    </div>
-                    <div class="question-text">${question.question}</div>
-                    <div class="options-container">
-                        ${question.options.map((option, optIndex) => `
-                            <label class="option-label">
-                                <input type="radio" name="question-${index}" value="${optIndex}">
-                                <span class="option-text">${option}</span>
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div class="question-actions">
-                        <button class="skip-btn" onclick="skipQuestion(${index})">
-                            <i class="fas fa-forward"></i>
-                            Boş Bırak
-                        </button>
-                    </div>
-                `;
-                container.appendChild(questionDiv);
-            });
-        }
-
-        // Skip question
-        function skipQuestion(questionIndex) {
-            const radioButtons = document.querySelectorAll(`input[name="question-${questionIndex}"]`);
-            radioButtons.forEach(radio => radio.checked = false);
-            userAnswers[questionIndex] = null;
-        }
-
-        // Finish quiz
-        function finishQuiz() {
-            // Collect answers
-            currentQuestions.forEach((question, index) => {
-                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
-                userAnswers[index] = selectedOption ? parseInt(selectedOption.value) : null;
-            });
-
-            // Calculate results
-            let correct = 0, wrong = 0, empty = 0;
+        // API'den gelen message string'ini parse eden fonksiyon
+        function parseQuestionsFromMessage(message) {
+            const questions = [];
+            const answers = [];
             
-            currentQuestions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                if (userAnswer === null) {
-                    empty++;
-                } else if (userAnswer === question.correctAnswer) {
-                    correct++;
-                } else {
-                    wrong++;
+            // Soruları ayır (markdown formatından)
+            const questionBlocks = message.split(/\*\*Soru \d+.*?\*\*/).filter(block => block.trim());
+            
+            // Cevap anahtarı iki farklı formatta olabilir:
+            // 1. "Doğru cevaplar sırasıyla a, d, c'dir."
+            // 2. "**Cevap Anahtarı:**\nSoru 1:  c) uçuyor\nSoru 2:  d) Belirsiz isim ..."
+            let answerLetters = [];
+            let answerDetails = [];
+            
+            // 1. Format: Doğru cevaplar sırasıyla ...
+            const match1 = message.match(/Doğru cevaplar.*?([a-e](,\s*[a-e])*)/i);
+            if (match1) {
+                answerLetters = match1[1].split(',').map(s => s.trim());
+            }
+            // 2. Format: Cevap Anahtarı: Soru 1:  c) ...
+            else {
+                const match2 = message.match(/Cevap Anahtarı:(.|\n)+/i);
+                if (match2) {
+                    // Her satırı bul
+                    const lines = match2[0].split('\n').filter(l => l.match(/Soru \d+:/));
+                    lines.forEach(line => {
+                        // Soru 1:  c) uçuyor
+                        const m = line.match(/Soru \d+:\s*([a-e])\)/i);
+                        if (m) {
+                            answerLetters.push(m[1]);
+                        } else {
+                            // Soru 1:  d) Belirsiz isim ( ... )
+                            const m2 = line.match(/Soru \d+:\s*([a-e])/i);
+                            if (m2) answerLetters.push(m2[1]);
+                        }
+                    });
+                }
+            }
+            
+            questionBlocks.forEach((block, index) => {
+                if (block.trim()) {
+                    // Soru metnini ve şıkları ayır
+                    const lines = block.split('\n').filter(line => line.trim());
+                    
+                    let questionText = '';
+                    let options = [];
+                    let correctAnswer = '';
+                    
+                    lines.forEach(line => {
+                        line = line.trim();
+                        if (line && !line.startsWith('a)') && !line.startsWith('b)') && 
+                            !line.startsWith('c)') && !line.startsWith('d)') && 
+                            !line.startsWith('e)') && !line.includes('Doğru cevaplar') && !line.includes('Cevap Anahtarı')) {
+                            questionText += line + ' ';
+                        } else if (line.match(/^[a-e]\)/)) {
+                            options.push(line);
+                        }
+                    });
+                    
+                    if (answerLetters && answerLetters[index]) {
+                        correctAnswer = answerLetters[index];
+                    }
+                    
+                    if (questionText && options.length >= 4) {
+                        questions.push({
+                            id: index + 1,
+                            text: questionText.trim(),
+                            options: options
+                        });
+                        answers.push(correctAnswer);
+                    }
                 }
             });
-
-            // Update stats
-            quizStats.totalQuestions += currentQuestions.length;
-            quizStats.correctAnswers += correct;
-            quizStats.wrongAnswers += wrong;
-            quizStats.emptyAnswers += empty;
-            localStorage.setItem('quiztor_stats', JSON.stringify(quizStats));
-
-            displayResults({ correct, wrong, empty });
-        }
-
-        // Display results
-        function displayResults(results) {
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('results-section').style.display = 'block';
-
-            // Update summary
-            document.getElementById('correct-count').textContent = results.correct;
-            document.getElementById('wrong-count').textContent = results.wrong;
-            document.getElementById('empty-count').textContent = results.empty;
-
-            // Display detailed results
-            const detailedResults = document.getElementById('detailed-results');
-            detailedResults.innerHTML = '';
-
-            currentQuestions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer === question.correctAnswer;
-                const isEmpty = userAnswer === null;
-                
-                const resultDiv = document.createElement('div');
-                resultDiv.className = `result-item ${isEmpty ? 'empty' : (isCorrect ? 'correct' : 'wrong')}`;
-                resultDiv.innerHTML = `
-                    <div class="result-header">
-                        <span class="result-number">Soru ${index + 1}</span>
-                        <span class="result-status">
-                            ${isEmpty ? 'Boş Bırakıldı' : (isCorrect ? 'Doğru' : 'Yanlış')}
-                        </span>
-                    </div>
-                    <div class="result-question">${question.question}</div>
-                    <div class="result-answers">
-                        <div class="correct-answer">
-                            <strong>Doğru Cevap:</strong> ${question.options[question.correctAnswer]}
-                        </div>
-                        ${!isEmpty ? `
-                            <div class="user-answer ${isCorrect ? 'correct' : 'wrong'}">
-                                <strong>Sizin Cevabınız:</strong> ${question.options[userAnswer]}
-                            </div>
-                        ` : ''}
-                        ${question.explanation ? `
-                            <div class="explanation">
-                                <strong>Açıklama:</strong> ${question.explanation}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-                detailedResults.appendChild(resultDiv);
-            });
-
-            updateStatsDisplay();
-        }
-
-        // Start new quiz
-        function startNewQuiz() {
-            document.getElementById('input-section').style.display = 'block';
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('results-section').style.display = 'none';
             
-            // Clear form
-            document.getElementById('subject-input').value = '';
-            document.querySelector('input[name="difficulty-level"][value="easy"]').checked = true;
-            document.getElementById('question-count').value = '3';
-            
-            currentQuestions = [];
-            userAnswers = {};
+            return { questions, answers };
         }
 
-        // Update stats display
-        function updateStatsDisplay() {
-            document.getElementById('total-questions').textContent = quizStats.totalQuestions;
-            document.getElementById('correct-answers').textContent = quizStats.correctAnswers;
-            document.getElementById('wrong-answers').textContent = quizStats.wrongAnswers;
-            document.getElementById('empty-answers').textContent = quizStats.emptyAnswers;
-        }
+        // Save test button handler
+        document.getElementById('save-test-btn').addEventListener('click', function() {
+            const outputContent = document.getElementById('output-content').innerHTML;
+            
+            if (!outputContent || outputContent.trim() === '') {
+                alert('Kaydedilecek test bulunamadı!');
+                return;
+            }
+
+            // Save test to localStorage
+            const savedTests = JSON.parse(localStorage.getItem('learnity_quiztor_tests') || '[]');
+            const test = {
+                id: Date.now().toString(),
+                subject: currentTest?.subject || 'Bilinmeyen Konu',
+                difficulty: currentTest?.type || 'normal',
+                questions: currentTest?.piece || 0,
+                content: outputContent,
+                createdAt: new Date().toISOString()
+            };
+            
+            savedTests.unshift(test);
+            localStorage.setItem('learnity_quiztor_tests', JSON.stringify(savedTests));
+            
+            alert('Test başarıyla kaydedildi!');
+        });
+
+        // Share button handler
+        document.getElementById('share-btn').addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Gemini Soru Oluşturucu - Learnity',
+                    text: `${currentTest?.subject || 'Test'} konusunda ${currentTest?.piece || 0} soru oluşturdum!`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy to clipboard
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Test linki panoya kopyalandı!');
+                });
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatistics();
+        });
     </script>
 
 </body>

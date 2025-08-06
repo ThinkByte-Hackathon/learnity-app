@@ -2,12 +2,12 @@
    UYUMLU CSS - MEVCUT HTML İLE ÇALIŞIR
    ========================================== */
 
-/* CSS Variables - Tutarlılık için merkezi değişkenler */
+/* CSS Variables - Nothor sayfalarıyla uyumlu */
 :root {
-    /* Colors */
-    --primary-color: #4494c9;
-    --secondary-color: #4494c9;
-    --accent-color: #5a9a74;
+    /* Colors - Nothor sayfalarından */
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #667eea;
     --text-primary: #333;
     --text-light: #555;
     --text-muted: #999;
@@ -17,8 +17,8 @@
     --bg-input: #eaeaea;
     --bg-overlay: rgba(0, 0, 50, 0.8);
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, #539fd5 0%, #5a9a74 100%); /* #b9d2ad eski yeşilin renk kodu*/
+    /* Gradients - Nothor sayfalarıyla aynı */
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-form-bg: var(--gradient-hero);
     
     /* Spacing */
@@ -57,13 +57,14 @@
 }
 
 body {
-    background: var(--bg-primary);
+    background: var(--gradient-hero);
     color: var(--text-primary);
     line-height: 1.6;
+    min-height: 100vh;
 }
 
 /* ==========================================
-   HOME PAGE STYLES - Anasayfa için özel
+   HOME PAGE STYLES - Eski düzen ile nothor renkleri
    ========================================== */
 
 body.home-page {
@@ -72,7 +73,7 @@ body.home-page {
     position: relative;
 }
 
-/* Header Container */
+/* Header Container - Eski düzen */
 .header-container {
     width: 100%;
     position: absolute;
@@ -93,7 +94,7 @@ body.home-page {
     color: var(--text-white);
 }
 
-/* Logo Styles */
+/* Logo Styles - Eski boyut ve düzen */
 .navbar .logo {
     display: flex;
     align-items: center;
@@ -114,12 +115,12 @@ body.home-page {
     margin-right: -5px;
 }
 
-.navbar .logo-text {
+.navbar .logo .logo-text {
     font-size: 28px;
     font-weight: 700;
     color: var(--text-white);
     text-decoration: underline;
-    text-decoration-color: #1b5d89;
+    text-decoration-color: #667eea;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 0.4px;
     text-shadow: var(--shadow-text);
@@ -127,7 +128,7 @@ body.home-page {
     position: relative;
 }
 
-/* Search Bar */
+/* Search Bar - Eski stil */
 .search-bar-middle {
     flex-grow: 1;
     margin: 0 var(--space-lg);
@@ -164,7 +165,7 @@ body.home-page {
     transform: translateY(-50%);
 }
 
-/* Main Navigation */
+/* Main Navigation - Eski stil */
 .main-nav-links ul {
     list-style: none;
     display: flex;
@@ -186,7 +187,7 @@ body.home-page {
     color: #a7a7a7;
 }
 
-/* Dropdown */
+/* Dropdown - Eski stil */
 .main-nav-links .dropdown {
     position: relative;
 }
@@ -223,7 +224,7 @@ body.home-page {
     display: block;
 }
 
-/* Auth Buttons */
+/* Auth Buttons - Eski stil */
 .auth-buttons {
     display: flex;
     align-items: center;
@@ -303,6 +304,7 @@ body.home-page {
     margin-bottom: 20px;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    transition: opacity 0.3s ease-in-out;
 }
 
 .slider-left-panel p {
@@ -310,6 +312,7 @@ body.home-page {
     line-height: 1.6;
     margin-bottom: var(--space-md);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: opacity 0.3s ease-in-out;
 }
 
 .explore-button {
@@ -359,22 +362,40 @@ body.home-page {
 }
 
 .arrow {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
     border: none;
     border-radius: var(--radius-full);
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--text-white);
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     transition: var(--transition-fast);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .arrow:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.arrow i {
+    color: var(--text-white) !important;
+    font-size: 18px !important;
+    pointer-events: none;
+    display: block;
+}
+
+/* Slider Content - Smooth Transitions */
+#slider-title {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#slider-description {
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* ==========================================
