@@ -1,35 +1,37 @@
-/* dashboard.css */
+/* dashboard.css - Nothor sayfalarıyla uyumlu */
 
-/* Genel Sayfa Stilleri */
+/* Genel Sayfa Stilleri - Nothor sayfalarıyla aynı */
 .dashboard-page {
-    background: #e4e3e3;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #333;
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 .container-dashboard {
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0,0,50,0.8), rgba(0,0,50,0.8)), url(background.png);
-    background-position: center;
-    background-size: cover;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Üst Kısım (Header) Stilleri */
+/* Üst Kısım (Header) Stilleri - Nothor sayfalarıyla aynı */
 .dashboard-header {
-    width: 90%;
-    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
-    color: #fff;
-    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
 }
 
 .dashboard-header .left-section {
@@ -40,56 +42,89 @@
 .dashboard-header .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
 .dashboard-header .logo img {
-    height: 60px;
+    width: 40px;
+    height: 40px;
 }
 
 .dashboard-header .logo h1 {
-    font-size: 28px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
     margin: 0;
-    color: #fff;
+    position: relative;
+}
+
+.dashboard-header .logo h1::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+    opacity: 0.8;
 }
 
 .dashboard-header .center-section {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     justify-content: center;
+    margin: 0 2rem;
 }
 
 .dashboard-header .search-bar {
-    position: relative;
-    width: 60%;
-    max-width: 500px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+    min-width: 300px;
+}
+
+.dashboard-header .search-bar:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
 }
 
 .dashboard-header .search-bar input {
-    width: 100%;
-    padding: 10px 40px 10px 15px;
-    border-radius: 20px;
     border: none;
     outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 16px;
+    background: transparent;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    flex: 1;
 }
 
 .dashboard-header .search-bar input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: #666;
+    font-weight: 400;
 }
 
 .dashboard-header .search-bar i {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
+    color: #667eea;
+    font-size: 1.2rem;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-/* Profil Kısmı Stilleri */
+.dashboard-header .search-bar i:hover {
+    color: #764ba2;
+}
+
+.dashboard-header .right-section {
+    display: flex;
+    align-items: center;
+}
+
 .profile-section {
     position: relative;
     cursor: pointer;
@@ -99,41 +134,53 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
-.profile-picture {
+.profile-info:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.profile-info .profile-picture {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #fff;
+    border: 2px solid #667eea;
 }
 
-.username {
+.profile-info .username {
     font-weight: 500;
+    color: #333;
 }
 
-.profile-dropdown-icon {
-    margin-left: 5px;
-    transition: transform 0.3s ease;
+.profile-info .profile-dropdown-icon {
+    color: #667eea;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .profile-section.active .profile-dropdown-icon {
     transform: rotate(180deg);
+    color: #764ba2;
 }
 
 .profile-dropdown-menu {
     position: absolute;
     top: 100%;
     right: 0;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     list-style: none;
-    padding: 10px 0;
-    min-width: 180px;
+    padding: 1rem 0;
+    min-width: 200px;
     z-index: 1000;
     display: none;
+    border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
 .profile-section.active .profile-dropdown-menu {
@@ -141,16 +188,87 @@
 }
 
 .profile-dropdown-menu li a {
-    display: block;
-    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
     color: #333;
     text-decoration: none;
-    text-align: left;
-    transition: background 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .profile-dropdown-menu li a:hover {
-    background: #f0f0f0;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    transform: translateX(5px);
+}
+
+.profile-dropdown-menu li a i {
+    color: #667eea;
+    width: 16px;
+}
+
+/* Profil Kısmı Stilleri - Nothor sayfalarıyla uyumlu */
+.profile-section {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.profile-info .profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #667eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.profile-info .profile-details h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.profile-info .profile-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.profile-info i {
+    color: #667eea;
+    transition: color 0.3s ease;
+}
+
+.profile-info:hover i {
+    color: #764ba2;
+}
+
+/* User Menu - Nothor sayfalarıyla uyumlu */
+.user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar i {
+    font-size: 2rem;
+    color: #667eea;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.user-avatar i:hover {
+    color: #764ba2;
 }
 
 /* Sol Kenar Çubuğu ve Ana İçerik Düzeni */
@@ -409,4 +527,58 @@
         width: 100%;
         margin-bottom: 20px;
     }
+}
+/* AI Modülleri Kartı Stilleri */
+.ai-modules-section {
+    margin-bottom: 2rem;
+}
+.ai-modules-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+    color: white;
+}
+.ai-modules-icon {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.ai-modules-content {
+    flex-grow: 1;
+}
+.ai-modules-content h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.ai-modules-content p {
+    margin: 0;
+    opacity: 0.9;
+}
+.ai-modules-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #667eea;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+.ai-modules-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
